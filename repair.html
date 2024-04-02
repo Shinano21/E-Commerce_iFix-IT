@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iFixIT - Laptop Repair Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>iFixIT - Laptop Repair Form</h1>
+    </header>
+    <main>
+      <section id="repair-form">
+        <h2>Repair Form</h2>
+        <form id="repair-form">
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" name="name" required /><br />
+
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br />
+
+          <label for="contact">Contact Number:</label><br />
+          <input type="text" id="contact" name="contact" required /><br />
+
+          <label for="address">Address:</label><br />
+          <textarea id="address" name="address" required></textarea><br />
+
+          <label for="device-brand">Device Brand:</label><br />
+          <input
+            type="text"
+            id="device-brand"
+            name="device-brand"
+            required
+          /><br />
+
+          <label for="issue">Issue of the Device:</label><br />
+          <textarea id="issue" name="issue" required></textarea><br />
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
