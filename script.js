@@ -25,17 +25,25 @@ document.addEventListener("DOMContentLoaded", function () {
   // Form submission handling
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    // You can add your authentication logic here
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const formData = new FormData(loginForm);
 
-    // Example of checking credentials (replace with your actual logic)
-    if (username === "admin" && password === "admin") {
-      alert("Login successful!");
-      // Redirect to admin.html
-      window.location.href = "admin.html";
-    } else {
-      alert("Invalid username or password. Please try again.");
-    }
+    // Send login credentials to server for authentication
+    fetch("login.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Redirect to admin page after successful login
+          window.location.href = "admin.html";
+        } else {
+          // Show error message if login fails
+          alert("Invalid username or password. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   });
 });
