@@ -14,20 +14,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateCart(price) {
     const li = document.createElement("li");
-    li.textContent = `$${price}`;
+    li.textContent = `₱${price}`;
     cartItems.appendChild(li);
-    totalDisplay.textContent = `Total: $${totalPrice}`;
+    totalDisplay.textContent = `Total: ₱${totalPrice}`;
   }
 
   const checkoutButton = document.getElementById("checkout");
   checkoutButton.addEventListener("click", function () {
-    alert(`Total: $${totalPrice}. Your order has been placed.`);
+    alert(`Total: ₱${totalPrice}. Your order has been placed.`);
     resetCart();
   });
 
   function resetCart() {
     cartItems.innerHTML = "";
     totalPrice = 0;
-    totalDisplay.textContent = `Total: $${totalPrice}`;
+    totalDisplay.textContent = `Total: ₱${totalPrice}`;
   }
 });
