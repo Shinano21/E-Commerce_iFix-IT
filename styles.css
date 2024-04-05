@@ -11,36 +11,81 @@ header {
   text-align: center;
 }
 
+nav {
+  background-color: #444;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+}
+
+h1 {
+  margin: 20px 0;
+  font-size: 32px;
+}
+
 main {
   padding: 20px;
 }
 
-.service {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.add-to-cart {
+#repair-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-#cart {
-  float: right;
-  width: 30%;
-  border-left: 1px solid #ccc;
-  padding-left: 20px;
+button[type="submit"]:hover {
+  background-color: #0056b3;
 }
 
-#cart-items {
-  list-style-type: none;
-  padding: 0;
-}
-
-#total {
-  font-weight: bold;
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007bff;
 }
