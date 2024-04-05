@@ -1,33 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const addToCartButtons = document.querySelectorAll(".add-to-cart");
-  const cartItems = document.getElementById("cart-items");
-  const totalDisplay = document.getElementById("total");
-  let totalPrice = 0;
+  const loginLink = document.getElementById("login-link");
+  const loginModal = document.getElementById("login-modal");
+  const loginClose = document.querySelector(".close");
+  const loginForm = document.getElementById("login-form");
 
-  addToCartButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const price = parseFloat(this.getAttribute("data-price"));
-      totalPrice += price;
-      updateCart(price);
-    });
+  // Show modal when login link is clicked
+  loginLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    loginModal.style.display = "block";
   });
 
-  function updateCart(price) {
-    const li = document.createElement("li");
-    li.textContent = `₱${price}`;
-    cartItems.appendChild(li);
-    totalDisplay.textContent = `Total: ₱${totalPrice}`;
-  }
-
-  const checkoutButton = document.getElementById("checkout");
-  checkoutButton.addEventListener("click", function () {
-    alert(`Total: ₱${totalPrice}. Your order has been placed.`);
-    resetCart();
+  // Close modal when close button is clicked
+  loginClose.addEventListener("click", function () {
+    loginModal.style.display = "none";
   });
 
-  function resetCart() {
-    cartItems.innerHTML = "";
-    totalPrice = 0;
-    totalDisplay.textContent = `Total: ₱${totalPrice}`;
-  }
+  // Close modal when user clicks outside of the modal
+  window.addEventListener("click", function (event) {
+    if (event.target == loginModal) {
+      loginModal.style.display = "none";
+    }
+  });
+
+  // Form submission handling
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    // You can add your authentication logic here
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Example of checking credentials (replace with your actual logic)
+    if (username === "admin" && password === "admin") {
+      alert("Login successful!");
+      // Redirect to admin.html
+      window.location.href = "admin.html";
+    } else {
+      alert("Invalid username or password. Please try again.");
+    }
+  });
 });

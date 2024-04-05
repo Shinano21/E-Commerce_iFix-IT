@@ -8,17 +8,38 @@
   </head>
   <body>
     <header>
-      <nav>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </nav>
-      <h1>iFixIT - Laptop Repair Service</h1>
-      <section id="repair-button">
-        <a href="repair.html"><button>Want to repair your laptop?</button></a>
-      </section>
+      <div class="header-content">
+        <h1>iFixIT - Laptop Repair Service</h1>
+        <nav>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" id="login-link">Login</a></li>
+            <!-- Login link for admin -->
+          </ul>
+        </nav>
+      </div>
     </header>
+    <main>
+      <div class="container">
+        <!-- Content of main page goes here -->
+      </div>
+    </main>
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+        <form id="login-form">
+          <label for="username">Username:</label><br />
+          <input type="text" id="username" name="username" required /><br />
+
+          <label for="password">Password:</label><br />
+          <input type="password" id="password" name="password" required /><br />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
