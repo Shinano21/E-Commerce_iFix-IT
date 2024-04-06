@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
+      .dashboard {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 800px;
+      }
+      .widget {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .widget h3 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to the Dashboard</h1>
+    </div>
+    <div class="container">
+      <div class="dashboard">
+        <div class="widget">
+          <h3>Recent Devices</h3>
+          <ul>
+            <li>iPhone 12 - Cracked screen</li>
+            <li>Samsung Galaxy S20 - Battery replacement</li>
+            <li>MacBook Pro - Keyboard issue</li>
+          </ul>
+        </div>
+        <div class="widget">
+          <h3>Customer Statistics</h3>
+          <p>Total Customers: 100</p>
+          <p>New Customers This Month: 10</p>
+        </div>
+        <div class="widget">
+          <h3>Employee Information</h3>
+          <p>Total Employees: 15</p>
+          <p>Active Employees: 12</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
