@@ -2,35 +2,24 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('orig.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  height: 100vh; /* Ensure body takes up full height of viewport */
 }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
+/* Adjust navbar styles */
+.navbar {
+  background-color: white; /* Set navbar background color to white */
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar-nav .nav-link {
+  color: black; /* Set color of navbar links to black */
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
 
 .container {
   max-width: 600px;
