@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cus_styles.css">
     <title>Customer Management</title>
-    <script>
-    document.getElementById('logout').addEventListener('click', function() {
-        var confirmLogout = confirm('Do you want to logout?');
-        if (confirmLogout) {
-            window.location.href = 'main.html';
-        }
-    });
-</script>
+   
 </head>
 <body>
 <header>
@@ -24,6 +17,7 @@
                 <li><a href="customer.php">Customers</a></li>
                 <li><a href="transaction.php">Transactions</a></li>
                 <li><a href="employee.php">Employees</a></li>
+                <li><a href="repas.php">Repair Assignment</a></li>
                 <li><button id="logout">Logout</button></li>
             </ul>
         </nav>
@@ -90,6 +84,14 @@
         ?>
         </tbody>
     </table>
+    <script>
+    document.getElementById('logout').addEventListener('click', function() {
+        var confirmLogout = confirm('Do you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'main.html';
+        }
+    });
+</script>
 </div>
 </body>
 </html>
