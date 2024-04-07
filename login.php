@@ -7,6 +7,15 @@
 </head>
 <body>
     <h2>Login</h2>
+    <?php
+    // Check if error parameter exists in the URL
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        if ($error == 1) {
+            echo "<p style='color: red;'>Invalid username or password.</p>";
+        }
+    }
+    ?>
     <form action="authenticate.php" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>

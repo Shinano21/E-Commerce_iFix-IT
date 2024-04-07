@@ -24,7 +24,7 @@
       <div class="container">
         <section id="repair-form">
           <h2>Repair Form</h2>
-          <form id="repair-form">
+          <form action="submit_form.php" method="POST">
             <label for="name">Name:</label><br />
             <input type="text" id="name" name="name" required /><br />
 
@@ -41,12 +41,13 @@
             <input
               type="text"
               id="device-brand"
-              name="device-brand"
+              name="device_brand"
               required
             /><br />
 
             <label for="issue">Issue of the Device:</label><br />
-            <textarea id="issue" name="issue" required></textarea><br />
+            <textarea id="issue" name="issue_description" required></textarea
+            ><br />
 
             <button type="submit">Submit</button>
           </form>
@@ -54,6 +55,5 @@
       </div>
       <a href="main.html">Go back to Home Page</a>
     </main>
-    <script src="script.js"></script>
   </body>
 </html>
