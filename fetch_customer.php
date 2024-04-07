@@ -12,16 +12,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Customer";
+// Fetch customer data
+$sql = "SELECT customer_id, name, email, phone_number, address FROM customer"; // Adjusted table name to lowercase
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+    echo "<h2>List of Customers</h2>";
+    echo "<ul>";
     // Output data of each row
-    echo "<table border='1'><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone Number</th><th>Address</th><th>Gender</th></tr>";
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["customer_id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["email"]. "</td><td>" . $row["phone_number"]. "</td><td>" . $row["address"]. "</td><td>" . $row["gender"]. "</td></tr>";
+        echo "<li><strong>Customer ID:</strong> " . $row["customer_id"]. "</li>";
+        echo "<li><strong>Name:</strong> " . $row["name"]. "</li>";
+        echo "<li><strong>Email:</strong> " . $row["email"]. "</li>";
+        echo "<li><strong>Phone Number:</strong> " . $row["phone_number"]. "</li>";
+        echo "<li><strong>Address:</strong> " . $row["address"]. "</li>";
+        echo "<hr>";
     }
-    echo "</table>";
+    echo "</ul>";
 } else {
     echo "0 results";
 }
