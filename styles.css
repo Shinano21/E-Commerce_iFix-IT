@@ -12,14 +12,32 @@ body {
 
 /* Adjust navbar styles */
 .navbar {
+  margin: 0 auto;
   background-color: white; /* Set navbar background color to white */
+width: 95%;
 }
 
 .navbar-nav .nav-link {
   color: black; /* Set color of navbar links to black */
 }
+.center {
+  text-align: center;
+  margin-top: 100px; /* Adjust margin top as needed */
+}
 
-
+.ifixit-text {
+  font-size: 9rem; /* Adjust font size as needed */
+  font-weight: bold; /* Optionally make the text bold */
+  color: white; /* Optionally change text color */
+}
+.sub-text{
+  color: white;
+  font-size: 25px;
+}
+.sub-text2{
+  color: white;
+  font-weight: lighter;
+}
 
 .container {
   max-width: 600px;
