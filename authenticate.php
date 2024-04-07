@@ -24,7 +24,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // User authenticated, start session
     $_SESSION['username'] = $username;
-    header("Location: dashboard.html"); // Redirect to dashboard
+    header("Location: admin.html"); // Redirect to dashboard
 } else {
     // Authentication failed, redirect back to login page
     header("Location: login.php?error=1");
