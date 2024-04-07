@@ -60,7 +60,7 @@
                 <li><a href="admin.html">Dashboard</a></li>
                 <li><a href="customer.php">Customers</a></li>
                 <li><a href="transaction.html">Transactions</a></li>
-                <li><a href="employee.html">Employees</a></li>
+             <li><a href="employee.php">Employees</a></li>
                 <li><button id="logout">Logout</button></li>
             </ul>
         </nav>
