@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Management</title>
+  </head>
+  <body>
+    <h1>Employee Management</h1>
+    <!-- Placeholder for displaying employee data -->
+    <div id="employee-list"></div>
+    <!-- Form for adding new employees -->
+    <form id="add-employee-form">
+      <h2>Add New Employee</h2>
+      <label for="employee-name">Name:</label>
+      <input type="text" id="employee-name" required />
+      <label for="employee-email">Email:</label>
+      <input type="email" id="employee-email" required />
+      <button type="submit">Add Employee</button>
+    </form>
+    <!-- Form for editing existing employees -->
+    <form id="edit-employee-form" style="display: none">
+      <h2>Edit Employee</h2>
+      <input type="hidden" id="edit-employee-id" />
+      <label for="edit-employee-name">Name:</label>
+      <input type="text" id="edit-employee-name" required />
+      <label for="edit-employee-email">Email:</label>
+      <input type="email" id="edit-employee-email" required />
+      <button type="submit">Update Employee</button>
+      <button type="button" id="cancel-edit-employee">Cancel</button>
+    </form>
+  </body>
+</html>
