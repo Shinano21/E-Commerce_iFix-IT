@@ -12,9 +12,10 @@ body {
 
 /* Adjust navbar styles */
 .navbar {
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: white; /* Set navbar background color to white */
 width: 95%;
+
 }
 
 .navbar-nav .nav-link {
