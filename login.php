@@ -1,43 +1,27 @@
-<?php
-// Get username and password from POST request
-$input_username = $_POST['username'];
-$input_password = $_POST['password'];
-
-// Database connection parameters
-$database = "ifixit";
-
-// Create connection
-$conn = new mysqli('localhost', 'root', '', $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Prepare SQL statement to retrieve admin record
-$stmt = $conn->prepare("SELECT * FROM Admin WHERE username = ?");
-$stmt->bind_param("s", $input_username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Check if admin record exists
-if ($result->num_rows > 0) {
-    // Admin record found, fetch row
-    $admin = $result->fetch_assoc();
-    // Verify password
-    if ($admin['password'] == $input_password) {
-        // Password matches, return success response
-        echo json_encode(array("success" => true));
-    } else {
-        // Password does not match, return error response
-        echo json_encode(array("success" => false));
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <?php
+    // Check if error parameter exists in the URL
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        if ($error == 1) {
+            echo "<p style='color: red;'>Invalid username or password.</p>";
+        }
     }
-} else {
-    // Admin record not found, return error response
-    echo json_encode(array("success" => false));
-}
-
-// Close database connection
-$stmt->close();
-$conn->close();
-?>
+    ?>
+    <form action="authenticate.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
