@@ -35,10 +35,12 @@
     </header>
 
     <div class="center">
-      <span class="ifixit-text">iFixIt</span>
+      <span class="ifixit-text">iFixIT</span>
       <div class="sub-text">Computer Repair Servicing</div>
       <div class="sub-text2">Delivering high quality and affordable, and efficient solutions</div>
-      <button type="button" class="btn btn-light mt-4">Repair your device</button>
+      <button onclick="window.location.href = 'repair.php'" id="repair-laptop-button" type="button" class="btn btn-light mt-4">Repair your device</button>
+
+
     </div>
  
   
@@ -48,30 +50,31 @@
       </div>
     </main>
     
-   <!-- Bootstrap 5 modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="login-form">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" required />
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" required />
+          <div class="modal-body">
+            <form id="login-form" method="POST" action="authenticate.php">
+              <!-- Change action to your PHP login processing script -->
+              <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

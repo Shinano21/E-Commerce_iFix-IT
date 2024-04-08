@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>iFixIT - Laptop Repair Form</title>
     <link rel="stylesheet" href="styles.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <h1>iFixIT - Laptop Repair Form</h1>
-        <nav>
-            <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Login</a></li>
-                <!-- Login link for admin -->
-            </ul>
-        </nav>
-    </div>
-</header>
+
+
 <main>
-    <div class="container">
+    <div class="container-sm">
         <section id="repair-form">
             <h2>Repair Form</h2>
             <?php
@@ -72,7 +67,12 @@
                 }
             }
             ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" style="color: black;">
+                <!-- Form elements here -->
                 <label for="name">Name:</label><br/>
                 <input type="text" id="name" name="name" required/><br/>
 
@@ -110,6 +110,18 @@
         </section>
     </div>
     <a href="main.html">Go back to Home Page</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+           
+               
 </main>
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
