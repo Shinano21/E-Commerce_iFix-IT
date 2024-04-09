@@ -22,12 +22,13 @@ $sql = "SELECT * FROM Admin WHERE username='$username' AND password='$password'"
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // User authenticated, start session
+    // User authenticated, set session variable
     $_SESSION['username'] = $username;
-    header("Location: admin.html"); // Redirect to dashboard
+    // Return JSON response indicating success
+    echo json_encode(["success" => true]);
 } else {
-    // Authentication failed, redirect back to login page
-    header("Location: login.php?error=1");
+    // Authentication failed, return JSON response indicating failure
+    echo json_encode(["success" => false]);
 }
 
 $conn->close();
