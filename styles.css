@@ -114,3 +114,46 @@ table th {
 table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
+
+#sidebar {
+  color: white;
+  height: 100%;
+  margin: 20px;
+  padding: 20px;
+
+}
+#sidebar a{
+  color: white;
+  text-decoration: none;
+}
+.dashboard-image {
+  width: 100%; /* Adjust the width of the image */
+  max-width: 600px; /* Set a maximum width for the image */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure proper block display */
+  margin-top: 20px; /* Adjust the top margin */
+  margin-bottom: 20px; /* Adjust the bottom margin */
+  margin-left: auto; /* Align the image to the right */
+  margin-right: auto; /* Align the image to the left */
+}
+.dashboard-stats {
+  display: flex;
+  justify-content: center;
+}
+
+.stat {
+  margin-right: 20px;
+}
+
+.stat p{
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
+
+
+
+
+
+
