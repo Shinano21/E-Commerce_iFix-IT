@@ -155,6 +155,7 @@ $conn->close();
 
             <input type="submit" value="Update">
         </form>
+         <button onclick="location.href='repas.php'">Go back</button>
     </div>
 </body>
 </html>
