@@ -15,6 +15,7 @@
         /* Adjust form size */
         #repair-form {
             width: 100%; /* Adjust the width as per your requirement */
+            height:100%
          
         }
         /* Adjust the size of the image */
@@ -24,8 +25,14 @@
         }
         #image-section img {
             max-width: 100%; /* Make the image responsive */
-            height: auto; /* Maintain the aspect ratio of the image */
+            height: 695px; /* Maintain the aspect ratio of the image */
         }
+        /* Media query for smaller screens */
+@media (max-width: 768px) {
+    #image-section img {
+        height: auto; /* Reset the height to auto for smaller screens */
+    }
+}
     
         /* Style for text on top of the image */
         .image-text {
@@ -166,7 +173,7 @@
                                     <input type="radio" id="other" name="gender" value="Other" />
                                     <label for="other">Other</label>
 
-                                    <button type="submit">Submit</button>
+                                    <button  class="btn btn-dark">Submit</button>
                                 </form>
                             </div>
                         </div>
