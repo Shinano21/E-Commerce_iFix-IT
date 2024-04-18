@@ -147,8 +147,9 @@ if (isset($_POST['add'])) {
         <label>Pickup Date:</label> <input type="date" name="pickup_date"><br>
         <label>Notes:</label> <textarea name="notes"></textarea><br>
         <input type="submit" name="add" value="Add Repair Assignment">
+         
     </form>
-
+<button onclick="location.href='repas.php'">Go back</button>
     <?php
     // Close connection
     $conn->close();
