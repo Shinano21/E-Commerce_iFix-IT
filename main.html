@@ -5,70 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>iFixIT - Laptop Repair Service</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <header>
-      <div class="header-content">
-        <h1>iFixIT - Laptop Repair Services</h1>
-        <nav>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#" id="login-link">Login</a></li>
-            <!-- Login link for admin -->
-          </ul>
-        </nav>
-      </div>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="aboutus.html">About us</a>
+            </div>
+            <a class="navbar-brand" href="#">iFixIT</a>
+            <div class="navbar-nav">
+              <a class="nav-link" href="#" id="login-link" >Log in</a>
+            
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
-    <a href="repair.php" id="repair-laptop-button">
-      Do you want your laptop to be repaired?
-    </a>
+
+    <div class="center">
+      <span class="ifixit-text">iFixIT</span>
+      <div class="sub-text">Computer Repair Servicing</div>
+      <div class="sub-text2">Delivering high quality and affordable, and efficient solutions</div>
+      <button onclick="window.location.href = 'repair.php'" id="repair-laptop-button" type="button" class="btn btn-light mt-4">Repair your device</button>
+
+
+    </div>
+ 
+  
     <main>
       <div class="container">
         <!-- Content of main page goes here -->
       </div>
     </main>
-    <div id="login-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Login</h2>
-        <form id="login-form" method="POST" action="authenticate.php">
-          <!-- Change action to your PHP login processing script -->
-          <label for="username">Username:</label><br />
-          <input type="text" id="username" name="username" required /><br />
-
-          <label for="password">Password:</label><br />
-          <input type="password" id="password" name="password" required /><br />
-
-          <button type="submit">Login</button>
-        </form>
+    
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="login-form" method="POST" action="authenticate.php">
+              <!-- Change action to your PHP login processing script -->
+              <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const loginLink = document.getElementById("login-link");
-        const loginModal = document.getElementById("login-modal");
-        const loginClose = document.querySelector(".close");
-        const loginForm = document.getElementById("login-form");
+    
 
-        // Show modal when login link is clicked
-        loginLink.addEventListener("click", function (event) {
-          event.preventDefault();
-          loginModal.style.display = "block";
-        });
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginLink = document.getElementById("login-link");
 
-        // Close modal when close button is clicked
-        loginClose.addEventListener("click", function () {
-          loginModal.style.display = "none";
-        });
+    // Show modal when login link is clicked
+    loginLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      var myModal = new bootstrap.Modal(document.getElementById('login-modal'));
+      myModal.show();
+    });
 
-        // Close modal when user clicks outside of the modal
-        window.addEventListener("click", function (event) {
-          if (event.target == loginModal) {
-            loginModal.style.display = "none";
+    // Form submission handling
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const formData = new FormData(loginForm);
+
+      // Send login credentials to server for authentication
+      fetch("login.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            // Redirect to admin page after successful login
+            window.location.href = "admin.html";
+          } else {
+            // Show error message if login fails
+            alert("Invalid username or password. Please try again.");
           }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
         });
-      });
-    </script>
+    });
+  });
+</script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    
   </body>
 </html>

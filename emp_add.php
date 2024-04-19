@@ -86,6 +86,7 @@
         <input type="text" id="schedule-id" name="schedule-id">
         <button type="submit">Add Employee</button>
     </form>
+     <button onclick="location.href='employee.php'">Go back</button>
 </div>
 
 </body>
