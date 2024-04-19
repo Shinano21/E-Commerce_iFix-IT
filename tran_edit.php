@@ -146,8 +146,14 @@
         <label for="date_paid">Date Paid:</label>
         <input type="date" name="date_paid" value="<?php echo $date_paid; ?>"><br>
         
-        <label for="payment_type">Payment Type:</label>
-        <input type="text" name="payment_type" value="<?php echo $payment_type; ?>"><br>
+       <label for="payment_type">Payment Type:</label>
+<select name="payment_type">
+    <option value="Cash" <?php if($payment_type == "Cash") echo "selected"; ?>>Cash</option>
+    <option value="Credit" <?php if($payment_type == "Credit") echo "selected"; ?>>Credit</option>
+    <option value="Debit" <?php if($payment_type == "Debit") echo "selected"; ?>>Debit</option>
+    <option value="E-Cash" <?php if($payment_type == "E-Cash") echo "selected"; ?>>E-Cash</option>
+</select><br>
+
         
         <label for="employee_name">Employee Name:</label>
         <input type="text" name="employee_name" value="<?php echo $employee_name; ?>" readonly><br>
