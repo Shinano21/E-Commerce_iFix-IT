@@ -2,9 +2,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('orig.jpg') no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("orig.jpg") no-repeat center center fixed;
   background-size: cover;
   color: white;
   height: 100vh; /* Ensure body takes up full height of viewport */
@@ -14,9 +13,7 @@ body {
 .navbar {
   margin: 0px auto;
   background-color: white; /* Set navbar background color to white */
-width: 95%;
-
-
+  width: 95%;
 }
 
 .navbar-nav .nav-link {
@@ -32,11 +29,11 @@ width: 95%;
   font-weight: bold; /* Optionally make the text bold */
   color: white; /* Optionally change text color */
 }
-.sub-text{
+.sub-text {
   color: white;
   font-size: 25px;
 }
-.sub-text2{
+.sub-text2 {
   color: white;
   font-weight: lighter;
 }
@@ -90,8 +87,6 @@ a {
   color: #007bff;
 }
 
-
-
 /* Table styles */
 
 table {
@@ -115,15 +110,13 @@ table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-
 #sidebar {
   color: white;
   height: 100%;
   margin: 20px;
   padding: 20px;
-
 }
-#sidebar a{
+#sidebar a {
   color: white;
   text-decoration: none;
 }
@@ -146,7 +139,7 @@ table tr:nth-child(even) {
   margin-right: 20px;
 }
 
-.stat p{
+.stat p {
   display: flex;
   justify-content: center;
   font-size: 50px;
@@ -157,9 +150,3 @@ table tr:nth-child(even) {
   line-height: 1.5;
   border-radius: 0.25rem;
 }
-
-
-
-
-
-
