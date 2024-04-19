@@ -62,20 +62,21 @@
             background-color: #f4f4f4;
             cursor: not-allowed;
         }
-        /* Button styles */
-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
-button:hover {
-    background-color: #0056b3;
-}
+        /* Button styles */
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -156,7 +157,11 @@ button:hover {
         <input type="text" name="total_amount" value="<?php echo $total_amount; ?>"><br>
         
         <label for="repair_status">Repair Status:</label>
-        <input type="text" name="repair_status" value="<?php echo $repair_status; ?>"><br>
+        <select name="repair_status">
+            <option value="Pending" <?php if($repair_status == "Pending") echo "selected"; ?>>Pending</option>
+            <option value="In Progress" <?php if($repair_status == "In Progress") echo "selected"; ?>>In Progress</option>
+            <option value="Completed" <?php if($repair_status == "Completed") echo "selected"; ?>>Completed</option>
+        </select><br>
         
         <input type="submit" value="Update">
         <button onclick="location.href='transaction.php'">Go back</button>
