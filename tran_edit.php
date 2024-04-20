@@ -71,7 +71,7 @@
             exit();
         }
         ?>
-        <form action="tran_save.php" method="POST">
+        <form action="transave.php" method="POST">
         <h2 class="text-center mb-4">Edit Transaction</h2>
             <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
             
