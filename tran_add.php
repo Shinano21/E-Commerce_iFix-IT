@@ -4,52 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Transaction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="date"],
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"],
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover,
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+   
 </head>
 <body>
-    <h1>Add Transaction</h1>
+    <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
+    
+    
     <!-- Form to add a new transaction -->
     <form action="tran_save.php" method="POST">
+    <h2 class="text-center mb-4">Add Transaction</h2>
         <!-- Include input fields for transaction details -->
         <?php
         // Connect to the database
@@ -62,59 +32,81 @@
         $sql = "SELECT customer_id, name FROM Customer";
         $result = $conn->query($sql);
         ?>
-        <label for="customer_id">Customer:</label>
-        <select name="customer_id" id="customer_id">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row['customer_id'] . "'>" . $row['name'] . "</option>";
+        <div class="mb-3">
+            <label for="customer_id" class="form-label">Customer:</label>
+            <select name="customer_id" id="customer_id" class="form-select">
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row['customer_id'] . "'>" . $row['name'] . "</option>";
+                    }
                 }
-            }
-            ?>
-        </select><br>
+                ?>
+            </select>
+        </div>
         <?php
         // Fetch employees from the Employee table
         $sql = "SELECT employee_id, first_name, last_name FROM Employee";
         $result = $conn->query($sql);
         ?>
-        <label for="employee_id">Employee:</label>
-        <select name="employee_id" id="employee_id">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row['employee_id'] . "'>" . $row['first_name'] . " " . $row['last_name'] . "</option>";
+        <div class="mb-3">
+            <label for="employee_id" class="form-label">Employee:</label>
+            <select name="employee_id" id="employee_id" class="form-select">
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row['employee_id'] . "'>" . $row['first_name'] . " " . $row['last_name'] . "</option>";
+                    }
                 }
-            }
-            ?>
-        </select><br>
+                ?>
+            </select>
+        </div>
         <?php
         // Close the database connection
         $conn->close();
         ?>
 
-        <label for="date_paid">Date Paid:</label>
-        <input type="date" name="date_paid" id="date_paid"><br>
+        <div class="mb-3">
+            <label for="date_paid" class="form-label">Date Paid:</label>
+            <input type="date" name="date_paid" id="date_paid" class="form-control">
+        </div>
 
-        <label for="payment_type">Payment Type:</label>
-        <select name="payment_type" id="payment_type">
-            <option value="Cash">Cash</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="Debit Card">Debit Card</option>
-            <option value="Online Payment">Online Payment</option>
-        </select><br>
+        <div class="mb-3">
+            <label for="payment_type" class="form-label">Payment Type:</label>
+            <select name="payment_type" id="payment_type" class="form-select">
+                <option value="Cash">Cash</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Online Payment">Online Payment</option>
+            </select>
+        </div>
 
-        <label for="total_amount">Total Amount:</label>
-        <input type="text" name="total_amount" id="total_amount"><br>
+        <div class="mb-3">
+            <label for="total_amount" class="form-label">Total Amount:</label>
+            <input type="text" name="total_amount" id="total_amount" class="form-control">
+        </div>
 
-        <label for="repair_status">Repair Status:</label>
-        <select name="repair_status" id="repair_status">
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-            <option value="Pending">Pending</option>
-        </select><br>
+        <div class="mb-3">
+            <label for="repair_status" class="form-label">Repair Status:</label>
+            <select name="repair_status" id="repair_status" class="form-select">
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-dark">
     </form>
-    <button onclick="location.href='transaction.php'">Go back</button>
+    </div>
+    <div class="text-end">
+    <button onclick="location.href='transaction.php'" class="btn btn-secondary mt-3">Go back</button>
+    </div>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
+

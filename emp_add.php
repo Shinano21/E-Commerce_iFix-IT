@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
-    <link rel="stylesheet" href="emp_add_styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <h1>Add Employee</h1>
-        <nav>
-            <ul>
-                <li><a href="admin.html">Dashboard</a></li>
-                <li><a href="customer.php">Customers</a></li>
-                <li><a href="transaction.php">Transactions</a></li>
-                <li><a href="employee.php">Employees</a></li>
-                <li><button id="logout">Logout</button></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
 <!-- Form for adding new employee -->
-<div id="add-employee-form">
-    <h2>Add New Employee</h2>
+<div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
+   
     <?php
     // Check if the form is submitted and display success message
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -57,9 +48,9 @@
         $schedule_id = $_POST["schedule-id"];
 
         if ($stmt->execute()) {
-            echo "<p class='success-message'>Employee added successfully!</p>";
+            echo "<p class='alert alert-success'>Employee added successfully!</p>";
         } else {
-            echo "Error: " . $stmt->error;
+            echo "<p class='alert alert-danger'>Error: " . $stmt->error . "</p>";
         }
 
         // Close statement and connection
@@ -68,26 +59,51 @@
     }
     ?>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" required>
-        <label for="last-name">Last Name:</label>
-        <input type="text" id="last-name" name="last-name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="phone-number">Phone Number:</label>
-        <input type="text" id="phone-number" name="phone-number">
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address">
-        <label for="date-of-birth">Date of Birth:</label>
-        <input type="date" id="date-of-birth" name="date-of-birth">
-        <label for="position-id">Position ID:</label>
-        <input type="text" id="position-id" name="position-id">
-        <label for="schedule-id">Schedule ID:</label>
-        <input type="text" id="schedule-id" name="schedule-id">
-        <button type="submit">Add Employee</button>
+    <h2 class="text-center">Add New Employee</h2>
+        <div class="mb-3">
+            <label for="first-name" class="form-label">First Name:</label>
+            <input type="text" id="first-name" name="first-name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="last-name" class="form-label">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone-number" class="form-label">Phone Number:</label>
+            <input type="text" id="phone-number" name="phone-number" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" id="address" name="address" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="date-of-birth" class="form-label">Date of Birth:</label>
+            <input type="date" id="date-of-birth" name="date-of-birth" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="position-id" class="form-label">Position ID:</label>
+            <input type="text" id="position-id" name="position-id" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="schedule-id" class="form-label">Schedule ID:</label>
+            <input type="text" id="schedule-id" name="schedule-id" class="form-control">
+        </div>
+        <button type="submit" style=" background-color: #343a40; color: white;">Add Employee</button>
     </form>
-     <button onclick="location.href='employee.php'">Go back</button>
+     
+</div>
+<div class="text-end">
+<button onclick="location.href='employee.php'" class="btn btn-secondary">Go back</button>
 </div>
 
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
