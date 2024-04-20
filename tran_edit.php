@@ -108,9 +108,12 @@
             </div>
             
             <input type="submit" value="Update" class="btn btn-dark">
-            <button onclick="location.href='transaction.php'" class="btn btn-secondary">Go back</button>
+            
         </form>
     </div>
+    <div class="text-end">
+        <button onclick="location.href='transaction.php'" class="btn btn-secondary">Go back</button>
+        </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
