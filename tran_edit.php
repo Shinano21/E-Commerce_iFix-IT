@@ -71,7 +71,7 @@
             exit();
         }
         ?>
-        <form action="tran_save.php" method="POST">
+        <form action="transave.php" method="POST">
         <h2 class="text-center mb-4">Edit Transaction</h2>
             <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
             
@@ -103,8 +103,12 @@
             </div>
             
             <div class="mb-3">
-                <label for="repair_status" class="form-label">Repair Status:</label>
-                <input type="text" name="repair_status" value="<?php echo $repair_status; ?>" class="form-control">
+                <label for="repair_status">Repair Status:</label>
+        <select name="repair_status">
+            <option value="Pending" <?php if($repair_status == "Pending") echo "selected"; ?>>Pending</option>
+            <option value="In Progress" <?php if($repair_status == "In Progress") echo "selected"; ?>>In Progress</option>
+            <option value="Completed" <?php if($repair_status == "Completed") echo "selected"; ?>>Completed</option>
+        </select>
             </div>
             
             <input type="submit" value="Update" class="btn btn-dark">
