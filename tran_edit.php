@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Transaction</title>
-<<<<<<< OtherBranch
     <link rel="stylesheet" href="styles.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    
-=======
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +17,7 @@
             background-color: #f4f4f4;
         }
 
-        h1 {
+        h2 {
             margin-bottom: 20px;
             text-align: center;
         }
@@ -87,8 +83,12 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .text-end {
+            text-align: end;
+            margin-top: 20px;
+        }
     </style>
->>>>>>> main
 </head>
 <body>
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
@@ -147,10 +147,9 @@
             echo "Transaction ID not provided";
             exit();
         }
-<<<<<<< OtherBranch
         ?>
         <form action="transave.php" method="POST">
-        <h2 class="text-center mb-4">Edit Transaction</h2>
+            <h2>Edit Transaction</h2>
             <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
             
             <div class="mb-3">
@@ -181,49 +180,12 @@
             </div>
             
             <div class="mb-3">
-                <label for="repair_status">Repair Status:</label>
-=======
-
-        $conn->close();
-    } else {
-        echo "Transaction ID not provided";
-        exit();
-    }
-    ?>
-    <form action="tran_save.php" method="POST">
-        <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
-        
-        <label for="customer_name">Customer Name:</label>
-        <input type="text" name="customer_name" value="<?php echo $customer_name; ?>" readonly><br>
-        <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>"><br>
-        
-        <label for="date_paid">Date Paid:</label>
-        <input type="date" name="date_paid" value="<?php echo $date_paid; ?>"><br>
-        
-       <label for="payment_type">Payment Type:</label>
-<select name="payment_type">
-    <option value="Cash" <?php if($payment_type == "Cash") echo "selected"; ?>>Cash</option>
-    <option value="Credit" <?php if($payment_type == "Credit") echo "selected"; ?>>Credit</option>
-    <option value="Debit" <?php if($payment_type == "Debit") echo "selected"; ?>>Debit</option>
-    <option value="E-Cash" <?php if($payment_type == "E-Cash") echo "selected"; ?>>E-Cash</option>
-</select><br>
-
-        
-        <label for="employee_name">Employee Name:</label>
-        <input type="text" name="employee_name" value="<?php echo $employee_name; ?>" readonly><br>
-        <input type="hidden" name="employee_id" value="<?php echo $employee_id; ?>"><br>
-        
-        <label for="total_amount">Total Amount:</label>
-        <input type="text" name="total_amount" value="<?php echo $total_amount; ?>"><br>
-        
-        <label for="repair_status">Repair Status:</label>
->>>>>>> main
-        <select name="repair_status">
-            <option value="Pending" <?php if($repair_status == "Pending") echo "selected"; ?>>Pending</option>
-            <option value="In Progress" <?php if($repair_status == "In Progress") echo "selected"; ?>>In Progress</option>
-            <option value="Completed" <?php if($repair_status == "Completed") echo "selected"; ?>>Completed</option>
-<<<<<<< OtherBranch
-        </select>
+                <label for="repair_status" class="form-label">Repair Status:</label>
+                <select name="repair_status" class="form-select">
+                    <option value="Pending" <?php if($repair_status == "Pending") echo "selected"; ?>>Pending</option>
+                    <option value="In Progress" <?php if($repair_status == "In Progress") echo "selected"; ?>>In Progress</option>
+                    <option value="Completed" <?php if($repair_status == "Completed") echo "selected"; ?>>Completed</option>
+                </select>
             </div>
             
             <input type="submit" value="Update" class="btn btn-dark">
@@ -232,18 +194,10 @@
     </div>
     <div class="text-end">
         <button onclick="location.href='transaction.php'" class="btn btn-secondary">Go back</button>
-        </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-=======
-        </select><br>
-        
-        <input type="submit" value="Update">
-        <button onclick="location.href='transaction.php'">Go back</button>
-    </form>
->>>>>>> main
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </body>
 </html>
