@@ -13,7 +13,11 @@ body {
 .navbar {
   margin: 0px auto;
   background-color: white; /* Set navbar background color to white */
+<<<<<<< OtherBranch
+width: 95%;
+=======
   width: 95%;
+>>>>>>> main
 }
 
 .navbar-nav .nav-link {
