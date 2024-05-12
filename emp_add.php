@@ -13,8 +13,8 @@
     />
 </head>
 <body>
-<!-- Form for adding new employee -->
-<div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
+<!-- Form for adding new employee --><br><br>
+<div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
    
     <?php
     // Check if the form is submitted and display success message
@@ -59,46 +59,53 @@
     }
     ?>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-    <h2 class="text-center">Add New Employee</h2>
-        <div class="mb-3">
-            <label for="first-name" class="form-label">First Name:</label>
-            <input type="text" id="first-name" name="first-name" class="form-control" required>
+        <h2 class="text-center">Add New Employee</h2>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="first-name" class="form-label">First Name:</label>
+                <input type="text" id="first-name" name="first-name" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="last-name" class="form-label">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" class="form-control" required>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="last-name" class="form-label">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="phone-number" class="form-label">Phone Number:</label>
-            <input type="text" id="phone-number" name="phone-number" class="form-control">
+        <div class="row mb-3">
+            <div class="col">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="phone-number" class="form-label">Phone Number:</label>
+                <input type="text" id="phone-number" name="phone-number" class="form-control">
+            </div>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address:</label>
             <input type="text" id="address" name="address" class="form-control">
         </div>
-        <div class="mb-3">
-            <label for="date-of-birth" class="form-label">Date of Birth:</label>
-            <input type="date" id="date-of-birth" name="date-of-birth" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="position-id" class="form-label">Position ID:</label>
-            <input type="text" id="position-id" name="position-id" class="form-control">
+        <div class="row mb-3">
+            <div class="col">
+                <label for="date-of-birth" class="form-label">Date of Birth:</label>
+                <input type="date" id="date-of-birth" name="date-of-birth" class="form-control">
+            </div>
+            <div class="col">
+                <label for="position-id" class="form-label">Position ID:</label>
+                <input type="text" id="position-id" name="position-id" class="form-control">
+            </div>
         </div>
         <div class="mb-3">
             <label for="schedule-id" class="form-label">Schedule ID:</label>
             <input type="text" id="schedule-id" name="schedule-id" class="form-control">
         </div>
-        <button type="submit" style=" background-color: #343a40; color: white;">Add Employee</button>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
+        <div class="text-end">
+<button onclick="location.href='employee.php'" class="btn btn-secondary">Go back</button>
+</div>
     </form>
      
 </div>
-<div class="text-end">
-<button onclick="location.href='employee.php'" class="btn btn-secondary">Go back</button>
-</div>
+
 
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

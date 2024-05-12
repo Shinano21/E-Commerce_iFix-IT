@@ -80,12 +80,12 @@ if(isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <body>
-<header>
+<!-- <header>
     <div class="header-content">
         <h1>iFixIT - Edit Customer</h1>
-        <!-- Navigation links -->
+      
     </div>
-</header>
+</header> --><br><br>
 <main>
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
         <section id="edit-customer-form">
@@ -146,15 +146,16 @@ if(isset($_GET['id'])) {
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>
+                <div class="text-end">
+        <a href="customer.php" class="btn btn-secondary">Go back</a>
+    </div>
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
             <?php endif; ?>
         </section>
     </div>
-    <div class="text-end">
-        <a href="customer.php" class="btn btn-secondary">Go back to Customer Page</a>
-    </div>
+    
 </main>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
