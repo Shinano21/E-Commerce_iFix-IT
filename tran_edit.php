@@ -153,9 +153,18 @@
                 <input type="date" name="date_paid" value="<?php echo $date_paid; ?>" class="form-control">
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="payment_type" class="form-label">Payment Type:</label>
                 <input type="text" name="payment_type" value="<?php echo $payment_type; ?>" class="form-control">
+            </div> -->
+             <div class="mb-3">
+                <label for="payment_type" class="form-label">Payment Type:</label>
+                <select name="payment_type" class="form-select">
+                    <option value="Cash" <?php if($payment_type == "Cash") echo "selected"; ?>>Cash</option>
+                    <option value="Credit Card" <?php if($payment_type == "Credit Card") echo "selected"; ?>>Credit Card</option>
+                    <option value="Debit Card" <?php if($payment_type == "Debit Card") echo "selected"; ?>>Debit Card</option>
+                    <option value="Online Payment" <?php if($payment_type == "Online Payment") echo "selected"; ?>>Online Payment</option>
+                </select>
             </div>
 
             <div class="mb-3">
