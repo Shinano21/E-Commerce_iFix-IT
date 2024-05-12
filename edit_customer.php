@@ -81,8 +81,8 @@ if(isset($_GET['id'])) {
 </head>
 <body>
 <header>
-    <div class="header-content text-white">
-        
+    <div class="header-content">
+        <h1>iFixIT - Edit Customer</h1>
         <!-- Navigation links -->
     </div>
 </header>
@@ -99,7 +99,7 @@ if(isset($_GET['id'])) {
                 <input type="hidden" name="customer_id" value="<?php echo $customer['customer_id']; ?>">
                 <div class="mb-3">
                     <label for="name" class="form-label text-black">Name:</label>
-                    <input type="text" id="name" name="name" value="<?php echo isset($customer['name']) ? $customer['name'] : ''; ?>" class="form-control" style="width: 300px; required/>
+                    <input type="text" id="name" name="name" value="<?php echo isset($customer['name']) ? $customer['name'] : ''; ?>" class="form-control" style="width: 300px;" required/>
                 </div>
 
                 <!-- Other form fields -->
@@ -139,7 +139,7 @@ if(isset($_GET['id'])) {
                     <label for="other" class="form-check-label text-black">Other</label>
                 </div>
 
-                <button type="submit" style=" background-color: #343a40; color: white;">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
@@ -147,9 +147,8 @@ if(isset($_GET['id'])) {
         </section>
     </div>
     <div class="text-end">
-    <a href="customer.php" class="btn btn-secondary">Go back to Customer Page</a>
+        <a href="customer.php" class="btn btn-secondary">Go back to Customer Page</a>
     </div>
-    
 </main>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
