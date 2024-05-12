@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Transaction</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-          crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +11,7 @@
             background-color: #f4f4f4;
         }
 
-        h2 {
+        h1 {
             margin-bottom: 20px;
             text-align: center;
         }
@@ -83,16 +77,12 @@
         button:hover {
             background-color: #0056b3;
         }
-
-        .text-end {
-            text-align: end;
-            margin-top: 20px;
-        }
     </style>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
-        
         <!-- Form to edit the selected transaction -->
         <?php
         // Retrieve transaction ID from the URL
@@ -149,55 +139,51 @@
         }
         ?>
         <form action="transave.php" method="POST">
-            <h2>Edit Transaction</h2>
+            <h2 class="text-center mb-4">Edit Transaction</h2>
             <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
-            
+
             <div class="mb-3">
                 <label for="customer_name" class="form-label">Customer Name:</label>
                 <input type="text" name="customer_name" value="<?php echo $customer_name; ?>" class="form-control" readonly>
             </div>
             <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
-            
+
             <div class="mb-3">
                 <label for="date_paid" class="form-label">Date Paid:</label>
                 <input type="date" name="date_paid" value="<?php echo $date_paid; ?>" class="form-control">
             </div>
-            
+
             <div class="mb-3">
                 <label for="payment_type" class="form-label">Payment Type:</label>
                 <input type="text" name="payment_type" value="<?php echo $payment_type; ?>" class="form-control">
             </div>
-            
+
             <div class="mb-3">
                 <label for="employee_name" class="form-label">Employee Name:</label>
                 <input type="text" name="employee_name" value="<?php echo $employee_name; ?>" class="form-control" readonly>
             </div>
             <input type="hidden" name="employee_id" value="<?php echo $employee_id; ?>">
-            
+
             <div class="mb-3">
                 <label for="total_amount" class="form-label">Total Amount:</label>
                 <input type="text" name="total_amount" value="<?php echo $total_amount; ?>" class="form-control">
             </div>
-            
+
             <div class="mb-3">
-                <label for="repair_status" class="form-label">Repair Status:</label>
-                <select name="repair_status" class="form-select">
+                <label for="repair_status">Repair Status:</label>
+                <select name="repair_status">
                     <option value="Pending" <?php if($repair_status == "Pending") echo "selected"; ?>>Pending</option>
                     <option value="In Progress" <?php if($repair_status == "In Progress") echo "selected"; ?>>In Progress</option>
                     <option value="Completed" <?php if($repair_status == "Completed") echo "selected"; ?>>Completed</option>
                 </select>
             </div>
-            
+
             <input type="submit" value="Update" class="btn btn-dark">
-            
         </form>
     </div>
     <div class="text-end">
         <button onclick="location.href='transaction.php'" class="btn btn-secondary">Go back</button>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
