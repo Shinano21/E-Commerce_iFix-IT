@@ -2,8 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("orig.jpg") no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("orig.jpg") no-repeat center center fixed;
   background-size: cover;
   color: white;
   height: 100vh; /* Ensure body takes up full height of viewport */
@@ -11,18 +10,15 @@ body {
 
 /* Adjust navbar styles */
 .navbar {
-  margin: 0px auto;
+  margin: 0 auto;
   background-color: white; /* Set navbar background color to white */
-<<<<<<< OtherBranch
-width: 95%;
-=======
   width: 95%;
->>>>>>> main
 }
 
 .navbar-nav .nav-link {
   color: black; /* Set color of navbar links to black */
 }
+
 .center {
   text-align: center;
   margin-top: 100px; /* Adjust margin top as needed */
@@ -33,10 +29,12 @@ width: 95%;
   font-weight: bold; /* Optionally make the text bold */
   color: white; /* Optionally change text color */
 }
+
 .sub-text {
   color: white;
   font-size: 25px;
 }
+
 .sub-text2 {
   color: white;
   font-weight: lighter;
@@ -92,7 +90,6 @@ a {
 }
 
 /* Table styles */
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -120,10 +117,12 @@ table tr:nth-child(even) {
   margin: 20px;
   padding: 20px;
 }
+
 #sidebar a {
   color: white;
   text-decoration: none;
 }
+
 .dashboard-image {
   width: 100%; /* Adjust the width of the image */
   max-width: 600px; /* Set a maximum width for the image */
@@ -134,6 +133,7 @@ table tr:nth-child(even) {
   margin-left: auto; /* Align the image to the right */
   margin-right: auto; /* Align the image to the left */
 }
+
 .dashboard-stats {
   display: flex;
   justify-content: center;
@@ -148,6 +148,7 @@ table tr:nth-child(even) {
   justify-content: center;
   font-size: 50px;
 }
+
 .btn-group .btn {
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
