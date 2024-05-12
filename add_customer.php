@@ -9,7 +9,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+// hhhh
 $customer_name = $_POST['customer_name'];
 $customer_email = $_POST['customer_email'];
 $phone_number = $_POST['phone_number'];
