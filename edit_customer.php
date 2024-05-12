@@ -76,6 +76,7 @@ if(isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>iFixIT - Edit Customer</title>
     <link rel="stylesheet" href="styles.css"/>
+ 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
@@ -129,26 +130,21 @@ if(isset($_GET['id'])) {
                     <textarea id="issue" name="issue_description" class="form-control" style="width: 300px;" required><?php echo isset($device['issue_description']) ? $device['issue_description'] : ''; ?></textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="gender" class="form-label text-black">Gender:</label><br />
-                    <input type="radio" id="male" name="gender" value="Male" <?php if(isset($customer['gender']) && $customer['gender'] === "Male") echo "checked"; ?> class="form-check-input" required />
-                    <label for="male" class="form-check-label text-black">Male</label>
-                    <input type="radio" id="female" name="gender" value="Female" <?php if(isset($customer['gender']) && $customer['gender'] === "Female") echo "checked"; ?> class="form-check-input" />
-                    <label for="female" class="form-check-label text-black">Female</label>
-                    <input type="radio" id="other" name="gender" value="Other" <?php if(isset($customer['gender']) && $customer['gender'] === "Other") echo "checked"; ?> class="form-check-input" />
-                    <label for="other" class="form-check-label text-black">Other</label>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary"style=" background-color: #343a40; color: white;">Update</button>
+                    </div>
+                    <div class="col">
+                        <a href="customer.php" class="btn btn-secondary">Go back</a>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Update</button>
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
             <?php endif; ?>
         </section>
     </div>
-    <div class="text-end">
-        <a href="customer.php" class="btn btn-secondary">Go back to Customer Page</a>
-    </div>
+  
 </main>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
