@@ -8,6 +8,16 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="repair.php">Repair Form</a></li>
+                <li><a href="feedback.php">Feedback Form</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </nav>
+
         <h2>Feedback Form</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <label for="name">Name:</label><br>
@@ -18,6 +28,8 @@
             <input type="number" id="rating" name="rating" min="1" max="5" required><br>
             <button type="submit" name="submit">Submit Feedback</button>
         </form>
+        <!-- Go back to main.html link -->
+        <a href="main.html">Go back to main.html</a>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $servername = "localhost";
