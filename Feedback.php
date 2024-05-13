@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Form</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            display: inline-block;
+            position: relative;
+            color: gold;
+        }
+
+        .rating > span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+
+        .rating > span:hover:before,
+        .rating > span:hover ~ span:before {
+            content: "\2605";
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -50,7 +71,13 @@
             <label for="feedback">Feedback:</label><br>
             <textarea id="feedback" name="feedback" rows="4" required></textarea><br>
             <label for="rating">Rating:</label><br>
-            <input type="number" id="rating" name="rating" min="1" max="5" required><br>
+            <div class="rating">
+                <span><input type="radio" id="rating" name="rating" value="5" required></span>
+                <span><input type="radio" id="rating" name="rating" value="4"></span>
+                <span><input type="radio" id="rating" name="rating" value="3"></span>
+                <span><input type="radio" id="rating" name="rating" value="2"></span>
+                <span><input type="radio" id="rating" name="rating" value="1"></span>
+            </div><br>
             <button type="submit" name="submit">Submit Feedback</button>
              <a class="button" href="main.html" id="go back"
                 >Go Back</a

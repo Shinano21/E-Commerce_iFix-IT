@@ -54,6 +54,7 @@
                     <li><a href="transaction.php">Transactions</a></li>
                     <li><a href="employee.php">Employees</a></li>
                     <li><a href="repas.php">Repair Assignment</a></li>
+                    <li><a href="Feedash.php">Feedbacks</a></li>
                 </ul>
             </div>
         </div>
