@@ -13,6 +13,8 @@
     />
 </head>
 <body>
+    <br>
+            <br>
 <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
     <?php
     // Database connection parameters
@@ -43,6 +45,7 @@
             $row = $result->fetch_assoc();
     ?>
             <!-- Form for editing employee -->
+            
             <form id="edit-employee-form" method="post">
                 <h2 class="text-center mb-4">Edit Employee</h2>
                 <input type="hidden" name="employee-id" value="<?php echo $row['employee_id']; ?>">
@@ -91,7 +94,8 @@
                         <input type="text" id="employee-schedule-id" name="employee-schedule-id" value="<?php echo $row['schedule_id']; ?>" class="form-control">
                     </div>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save</button><br>
+                 <a href="employee.php" class="btn btn-secondary">Go back</a>
             </form>
             
     <?php
@@ -136,10 +140,11 @@
     // Close database connection
     $conn->close();
     ?>
+    <div class="text-end">
+   
 </div>
-<div class="text-end">
-    <a href="employee.php" class="btn btn-secondary">Go back</a>
 </div>
+
 
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

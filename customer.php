@@ -74,7 +74,7 @@
                             <th scope="col">Address</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Brand</th>
-                            <th scope="col">Model</th>
+                           
                             <th scope="col">Issue Description</th>
                             <th scope="col">Operations</th>
                         </tr>
@@ -107,7 +107,7 @@
                                     echo '<td>' . $row['address'] . '</td>';
                                     echo '<td>' . $row['gender'] . '</td>';
                                     echo '<td>' . $row['brand'] . '</td>';
-                                    echo '<td>' . $row['model'] . '</td>';
+                                    // echo '<td>' . $row['model'] . '</td>';
                                     echo '<td>' . $row['issue_description'] . '</td>';
                                     echo '<td>';
                                     echo '<div class="btn-group" role="group" aria-label="Operations">';

@@ -96,61 +96,48 @@
         $conn->close();
         ?>
 
+         <div class="form-container">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        <h2>Edit Repair Assignment</h2>
+            <h2>Edit Repair Assignment</h2>
             <input type="hidden" name="repair_id" value="<?php echo $repair_id; ?>">
-            
-            <div class="mb-3">
-                <label for="emp_first_name" class="form-label">Employee First Name:</label>
-                <input type="text" name="emp_first_name" value="<?php echo $emp_first_name; ?>" class="form-control">
-            </div>
 
-            <div class="mb-3">
-                <label for="emp_last_name" class="form-label">Employee Last Name:</label>
-                <input type="text" name="emp_last_name" value="<?php echo $emp_last_name; ?>" class="form-control">
-            </div>
+            <label for="emp_first_name">Employee First Name:</label>
+            <input type="text" name="emp_first_name" value="<?php echo $emp_first_name; ?>" class="form-control">
 
-            <div class="mb-3">
-                <label for="device_id" class="form-label">Device ID:</label>
-                <input type="text" name="device_id" value="<?php echo $device_id; ?>" class="form-control">
-            </div>
+            <label for="emp_last_name">Employee Last Name:</label>
+            <input type="text" name="emp_last_name" value="<?php echo $emp_last_name; ?>" class="form-control">
 
-            <div class="mb-3">
-                <label for="repair_status" class="form-label">Repair Status:</label>
-                <select name="repair_status" id="repair_status" class="form-select">
-                    <option value="In Progress" <?php if ($repair_status == 'In Progress') echo 'selected'; ?>>In Progress</option>
-                    <option value="Completed" <?php if ($repair_status == 'Completed') echo 'selected'; ?>>Completed</option>
-                    <option value="Pending" <?php if ($repair_status == 'Pending') echo 'selected'; ?>>Pending</option>
-                </select>
-            </div>
+            <label for="device_id">Device ID:</label>
+            <input type="text" name="device_id" value="<?php echo $device_id; ?>" class="form-control">
 
-            <div class="mb-3">
-                <label for="repair_date" class="form-label">Repair Date:</label>
-                <input type="date" name="repair_date" value="<?php echo $repair_date; ?>" class="form-control">
-            </div>
+            <label for="repair_status">Repair Status:</label>
+            <select name="repair_status" id="repair_status" class="form-select">
+                <option value="In Progress" <?php if ($repair_status == 'In Progress') echo 'selected'; ?>>In Progress</option>
+                <option value="Completed" <?php if ($repair_status == 'Completed') echo 'selected'; ?>>Completed</option>
+                <option value="Pending" <?php if ($repair_status == 'Pending') echo 'selected'; ?>>Pending</option>
+            </select>
 
-            <div class="mb-3">
-                <label for="pickup_date" class="form-label">Pickup Date:</label>
-                <input type="date" name="pickup_date" value="<?php echo $pickup_date; ?>" class="form-control">
-            </div>
+            <label for="repair_date">Repair Date:</label>
+            <input type="date" name="repair_date" value="<?php echo $repair_date; ?>" class="form-control">
 
-            <div class="mb-3">
-                <label for="notes" class="form-label">Notes:</label>
-                <textarea name="notes" class="form-control"><?php echo $notes; ?></textarea>
-            </div>
+            <label for="pickup_date">Pickup Date:</label>
+            <input type="date" name="pickup_date" value="<?php echo $pickup_date; ?>" class="form-control">
 
-            <button type="submit" style=" background-color: #343a40; color: white;">Update</button>
+            <label for="notes">Notes:</label>
+            <textarea name="notes" class="form-control"><?php echo $notes; ?></textarea>
+<br>
+            <button type="submit">Update</button>
         </form>
-
     </div>
-    <div class="text-end">
-    <button onclick="location.href='repas.php'" class="btn btn-secondary">Go back</button>
-    </div>
+   
  
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+     <div class="text-end">
+    <button onclick="location.href='repas.php'" class="btn btn-secondary">Go back</button>
+    </div>
 </body>
 </html>
