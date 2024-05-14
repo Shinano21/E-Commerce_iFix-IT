@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Repair Assignment</title>
     <link rel="stylesheet" href="styles.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <body>
-    <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px; display:flex; justify-content:center;">
-      
-
+    
+    <div class="container mt-5" style="background-color: rgba(255, 255, 255, 0.5); width:600px;">
+        
         <?php
         // Database connection details
         $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
@@ -74,78 +69,82 @@
         ?>
 
         <form method="post">
-        <h2>Add Repair Assignment</h2>
-            <div class="mb-3">
-                <?php
-                // Fetch available employees
-                $sql_employee = "SELECT employee_id, first_name, last_name FROM Employee";
-                $result_employee = $conn->query($sql_employee);
+            <h2>Add Repair Assignment</h2>
+            <div class="row">
+                <!-- Left Column for Employee and Device ID -->
+                <div class="col">
+                    <div class="mb-3">
+                        <?php
+                        // Fetch available employees
+                        $sql_employee = "SELECT employee_id, first_name, last_name FROM Employee";
+                        $result_employee = $conn->query($sql_employee);
 
-                if ($result_employee->num_rows > 0) {
-                    echo "<label for='employee_id' class='form-label'>Employee:</label> <select name='employee_id' class='form-select'>";
-                    while ($row_employee = $result_employee->fetch_assoc()) {
-                        echo "<option value='" . $row_employee["employee_id"] . "'>" . $row_employee["last_name"] . ", " . $row_employee["first_name"] . "</option>";
-                    }
-                    echo "</select><br>";
-                } else {
-                    echo "<p class='alert alert-danger'>No employees available</p>";
-                }
-                ?>
+                        if ($result_employee->num_rows > 0) {
+                            echo "<label for='employee_id' class='form-label'>Employee:</label> <select name='employee_id' class='form-select'>";
+                            while ($row_employee = $result_employee->fetch_assoc()) {
+                                echo "<option value='" . $row_employee["employee_id"] . "'>" . $row_employee["last_name"] . ", " . $row_employee["first_name"] . "</option>";
+                            }
+                            echo "</select><br>";
+                        } else {
+                            echo "<p class='alert alert-danger'>No employees available</p>";
+                        }
+                        ?>
+                    </div>
+
+                    <div class="mb-3">
+                        <?php
+                        // Fetch available device IDs
+                        $sql_device = "SELECT device_id FROM Device";
+                        $result_device = $conn->query($sql_device);
+
+                        if ($result_device->num_rows > 0) {
+                            echo "<label for='device_id' class='form-label'>Device ID:</label> <select name='device_id' class='form-select'>";
+                            while ($row_device = $result_device->fetch_assoc()) {
+                                echo "<option value='" . $row_device["device_id"] . "'>" . $row_device["device_id"] . "</option>";
+                            }
+                            echo "</select><br>";
+                        } else {
+                            echo "<p class='alert alert-danger'>No devices available</p>";
+                        }
+                        ?>
+                    </div>
+                </div>
+                <!-- Right Column for Repair Status and Repair Date -->
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="repair_status" class="form-label">Repair Status:</label>
+                        <select name="repair_status" id="repair_status" class="form-select">
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="repair_date" class="form-label">Repair Date:</label>
+                        <input type="date" name="repair_date" class="form-control">
+                    </div>
+<br>
+                    <div class="mb-3">
+                        <label for="pickup_date" class="form-label">Pickup Date:</label>
+                        <input type="date" name="pickup_date" class="form-control">
+                    </div>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <?php
-                // Fetch available device IDs
-                $sql_device = "SELECT device_id FROM Device";
-                $result_device = $conn->query($sql_device);
-
-                if ($result_device->num_rows > 0) {
-                    echo "<label for='device_id' class='form-label'>Device ID:</label> <select name='device_id' class='form-select'>";
-                    while ($row_device = $result_device->fetch_assoc()) {
-                        echo "<option value='" . $row_device["device_id"] . "'>" . $row_device["device_id"] . "</option>";
-                    }
-                    echo "</select><br>";
-                } else {
-                    echo "<p class='alert alert-danger'>No devices available</p>";
-                }
-                ?>
-            </div>
-
-            <div class="mb-3">
-                <label for="repair_status" class="form-label">Repair Status:</label>
-                <select name="repair_status" id="repair_status" class="form-select">
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Pending">Pending</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="repair_date" class="form-label">Repair Date:</label>
-                <input type="date" name="repair_date" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label for="pickup_date" class="form-label">Pickup Date:</label>
-                <input type="date" name="pickup_date" class="form-control">
-            </div>
-
+            <!-- Notes Section -->
             <div class="mb-3">
                 <label for="notes" class="form-label">Notes:</label>
                 <textarea name="notes" class="form-control"></textarea>
             </div>
 
-            <button type="submit" name="add" style=" background-color: #343a40; color: white;">Add Repair Assignment</button>
+            <button type="submit" name="add" style="background-color: #343a40; color: white;" class="btn">Add Repair Assignment</button>
+            <a href="repas.php">Go Back</a>
+
         </form>
     </div>
-    <div class="text-end">
-    <button onclick="location.href='repas.php'" class="btn btn-secondary">Go back</button>
-    </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

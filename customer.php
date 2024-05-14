@@ -59,6 +59,7 @@
                     <li><a href="transaction.php">Transactions</a></li>
                     <li><a href="employee.php">Employees</a></li>
                     <li><a href="repas.php">Repair Assignment</a></li>
+                    <li><a href="Feedash.php">Feedbacks</a></li>
                 </ul>
             </div>
         </div>
@@ -74,7 +75,6 @@
                             <th scope="col">Address</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Brand</th>
-                            <th scope="col">Model</th>
                             <th scope="col">Issue Description</th>
                             <th scope="col">Operations</th>
                         </tr>
@@ -94,7 +94,7 @@
                                 die("Connection failed: " . $conn->connect_error);
                             }
 
-                            $sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.model, d.issue_description FROM customer c JOIN device d ON c.customer_id = d.customer_id";
+                            $sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.issue_description FROM customer c JOIN device d ON c.customer_id = d.customer_id";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -107,7 +107,6 @@
                                     echo '<td>' . $row['address'] . '</td>';
                                     echo '<td>' . $row['gender'] . '</td>';
                                     echo '<td>' . $row['brand'] . '</td>';
-                                    echo '<td>' . $row['model'] . '</td>';
                                     echo '<td>' . $row['issue_description'] . '</td>';
                                     echo '<td>';
                                     echo '<div class="btn-group" role="group" aria-label="Operations">';
@@ -118,7 +117,7 @@
                                     echo '</tr>';
                                 }
                             } else {
-                                echo "<tr><td colspan='10'>0 results</td></tr>";
+                                echo "<tr><td colspan='9'>0 results</td></tr>";
                             }
                             $conn->close();
                             ?>
@@ -134,19 +133,8 @@
         // Redirect to the login page or perform logout actions
         window.location.href = "main.html";
       });
-    </script>
-       <script>
-      document.getElementById("logout").addEventListener("click", function () {
-        // Redirect to the login page or perform logout actions
-        window.location.href = "main.html";
-      });
-    </script>
+</script>
 
-       
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-</body>
-</html>
+      int
