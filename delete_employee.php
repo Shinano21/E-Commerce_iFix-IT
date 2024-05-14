@@ -19,15 +19,26 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 } else {
     $employee_id = $_GET['id'];
 
-    // Delete employee from the database
-    $sql = "DELETE FROM employee WHERE employee_id = $employee_id";
-
-    if ($conn->query($sql) === TRUE) {
-        // Redirect to employee.php after successful delete
-        header("Location: employee.php");
-        exit();
+    // Validate if the provided ID is numeric
+    if (!is_numeric($employee_id)) {
+        echo "<p class='alert alert-danger'>Invalid employee ID.</p>";
     } else {
-        echo "<p class='alert alert-danger'>Error deleting employee: " . $conn->error . "</p>";
+        // Delete employee from the database
+        $sql = "DELETE FROM employee WHERE employee_id = $employee_id";
+
+        if ($conn->query($sql) === TRUE) {
+            // Redirect to employee.php after successful delete
+            header("Location: employee.php");
+            exit();
+        } else {
+            // Check if the error is related to foreign key constraint
+            if (strpos($conn->error, 'foreign key constraint fails') !== false) {
+                echo "<p class='alert alert-danger'>Error deleting employee: Cannot delete or update a parent row: a foreign key constraint fails</p>";
+            } else {
+                // Display generic error message
+                echo "<p class='alert alert-danger'>Error deleting employee: " . $conn->error . "</p>";
+            }
+        }
     }
 }
 
