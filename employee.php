@@ -100,7 +100,7 @@
                                 <th>Address</th>
                                 <th>Date of Birth</th>
                                 <th>Position ID</th>
-                                <th>Schedule ID</th>
+                                <th>Schedule</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
