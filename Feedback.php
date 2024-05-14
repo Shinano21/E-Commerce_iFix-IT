@@ -21,8 +21,8 @@
           </div>
           <a class="navbar-brand" href="#">iFixIT</a>
           <div class="navbar-nav">
-            <a class="nav-link" href="#" id="login-link">Log in</a>
-            <a class="nav-link" href="Feedback.php" id="login-link">Feedback</a>
+        
+            <a class="nav-link" href="Feedback.php" id="feedback">Feedback</a>
           </div>
         </div>
       </div>
