@@ -1,63 +1,75 @@
 <?php
-// Database connection parameters
-$servername = "localhost"; // Change this if your MySQL server is running on a different host
-$username = "root"; // Change this if your MySQL username is different
-$password = ""; // Change this if your MySQL password is different
-$database = "ifixit"; // Change this to your actual database name
+// Establish database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ifixit";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Initialize variables
-$search = "";
-if(isset($_GET['search'])) {
-    $search = $_GET['search'];
+// Handle search
+$search_query = "";
+if(isset($_GET['search'])){
+    $search_query = $_GET['search'];
 }
 
-// Fetch transactions based on search criteria
-$sql = "SELECT c.name AS customer_name, t.repair_status FROM `transaction` t
-        INNER JOIN `customer` c ON t.customer_id = c.customer_id
-        WHERE c.name LIKE '%$search%'";
+// Query to fetch customer information with repair status and pickup date
+$sql = "SELECT c.name, r.repair_status, r.pickup_date, CONCAT(e.first_name, ' ', e.last_name) AS employee_name
+        FROM customer c
+        LEFT JOIN device d ON c.customer_id = d.customer_id
+        LEFT JOIN repairassignment r ON d.device_id = r.device_id
+        LEFT JOIN employee e ON r.emp_first_name = e.first_name AND r.emp_last_name = e.last_name
+        WHERE c.name LIKE '%$search_query%'
+        ORDER BY c.name";
 
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction History</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Customer Display</title>
 </head>
 <body>
 
-<h1>Transaction History</h1>
+<h2>Customer Information</h2>
 
-<form method="GET" action="">
-    <input type="text" name="search" placeholder="Search by customer name...">
-    <button type="submit">Search</button>
+<!-- Search bar -->
+<form method="GET">
+    <input type="text" name="search" placeholder="Search by customer name" value="<?php echo $search_query; ?>">
+    <input type="submit" value="Search">
 </form>
 
-<?php
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<p>Customer Name: " . $row["customer_name"] . " - Repair Status: " . $row["repair_status"] . "</p>";
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Repair Status</th>
+        <th>Pickup Date</th>
+        <th>Employee In Charge</th>
+    </tr>
+    <?php
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['repair_status'] . "</td>";
+            echo "<td>" . $row['pickup_date'] . "</td>";
+            echo "<td>" . $row['employee_name'] . "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='4'>No records found</td></tr>";
     }
-} else {
-    echo "<p>No transactions found.</p>";
-}
+    ?>
+</table>
+
+<?php
+$conn->close();
 ?>
 
 </body>
 </html>
-
-<?php
-// Close database connection
-$conn->close();
-?>

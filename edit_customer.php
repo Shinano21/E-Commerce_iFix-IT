@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brand = $_POST['device_brand'];
     $issue_description = $_POST['issue_description'];
     $gender = $_POST['gender'];
+    $new_employee_id = $_POST['employee_id'];
 
     // Update Customer table
     $sql_customer = "UPDATE customer SET name='$name', email='$email', phone_number='$phone_number', address='$address', gender='$gender' WHERE customer_id=$customer_id";
@@ -32,6 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Update Device table if necessary
         $sql_device = "UPDATE device SET brand='$brand', issue_description='$issue_description' WHERE customer_id=$customer_id";
         $conn->query($sql_device); // Assuming there's only one device per customer
+
+        // Update appointment with the new employee in charge
+        $sql_appointment = "UPDATE appointment SET employee_id=$new_employee_id WHERE customer_id=$customer_id";
+        $conn->query($sql_appointment);
 
         // Display success message
         $log_message = "Customer details updated successfully.";
@@ -72,14 +77,14 @@ if(isset($_GET['id'])) {
         } elseif ($result_appointment->num_rows > 0) {
             $appointment = $result_appointment->fetch_assoc();
             
-            // Fetch employee data associated with the appointment
-            $employee_id = $appointment['employee_id'];
-            $sql_employee = "SELECT * FROM employee WHERE employee_id=$employee_id";
-            $result_employee = $conn->query($sql_employee);
-            if ($result_employee === false) {
-                echo "Error executing employee query: " . $conn->error;
-            } elseif ($result_employee->num_rows > 0) {
-                $employee = $result_employee->fetch_assoc();
+            // Fetch all employees for the dropdown menu
+            $sql_employees = "SELECT * FROM employee";
+            $result_employees = $conn->query($sql_employees);
+            $employees = [];
+            if ($result_employees !== false && $result_employees->num_rows > 0) {
+                while($row = $result_employees->fetch_assoc()) {
+                    $employees[] = $row;
+                }
             }
         }
     } else {
@@ -164,17 +169,19 @@ if(isset($_GET['id'])) {
                     <label class="form-label text-black">Appointment Information:</label><br />
                     <p><strong>Date:</strong> <?php echo $appointment['appointment_date']; ?></p>
                     <p><strong>Time:</strong> <?php echo $appointment['appointment_time']; ?></p>
-                   
                 </div>
                 <?php endif; ?>
 
-                <!-- Display employee in charge details -->
-                <?php if(isset($employee) && $employee !== null): ?>
+                <!-- Dropdown menu for selecting the new employee in charge -->
+                <?php if(isset($employees) && !empty($employees)): ?>
                 <div class="mb-3">
-                    <label class="form-label text-black">Employee in Charge:</label><br />
-                    <p><strong>Name:</strong> <?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?></p>
-                    <p><strong>Email:</strong> <?php echo $employee['email']; ?></p>
-                    <p><strong>Phone Number:</strong> <?php echo $employee['phone_number']; ?></p>
+                    <label for="employee" class="form-label text-black">Select Employee in Charge:</label>
+                    <select id="employee" name="employee_id" class="form-select" required>
+                        <option value="">Select Employee</option>
+                        <?php foreach($employees as $employee): ?>
+                        <option value="<?php echo $employee['employee_id']; ?>" <?php if(isset($appointment) && $appointment['employee_id'] == $employee['employee_id']) echo 'selected'; ?>><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <?php endif; ?>
 
