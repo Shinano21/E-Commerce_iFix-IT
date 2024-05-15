@@ -21,15 +21,12 @@
           </div>
           <a class="navbar-brand" href="#">iFixIT</a>
           <div class="navbar-nav">
-        
             <a class="nav-link" href="Feedback.php" id="feedback">Feedback</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
-
-  
 
   <main>
     <div class="container">
@@ -78,6 +75,43 @@
           $conn = null;
       }
       ?>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="container mt-5">
+      <h2>Customer Reviews</h2>
+      <div id="reviews">
+        <?php
+        // Fetch reviews from the database and display them
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "ifixit";
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $conn->prepare("SELECT * FROM Feedback");
+            $stmt->execute();
+
+            // Display each review
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<div class='card mb-3'>";
+                echo "<div class='card-body'>";
+                echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
+                echo "<p class='card-text'>" . $row['feedback_text'] . "</p>";
+                echo "<p class='card-text'><strong>Rating:</strong> " . $row['rating'] . "</p>";
+                echo "</div>";
+                echo "</div>";
+            }
+        } catch(PDOException $e) {
+            echo "<p class='mt-3'>Error: " . $e->getMessage() . "</p>";
+        }
+
+        $conn = null;
+        ?>
+      </div>
     </div>
   </main>
 

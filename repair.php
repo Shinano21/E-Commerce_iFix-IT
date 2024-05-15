@@ -4,80 +4,42 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>iFixIT - Laptop Repair Form</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
     <style>
-        /* Adjust form size */
-        #repair-form {
-            width: 100%; /* Adjust the width as per your requirement */
-            height:100%
-         
-        }
         /* Adjust the size of the image */
-        #image-section {
-            position: relative; /* Make the container a positioning context for absolute positioning */
-         
-        }
         #image-section img {
-            max-width: 100%; /* Make the image responsive */
-            height: 695px; /* Maintain the aspect ratio of the image */
+            max-width: 100%;
+            height: auto;
         }
-        /* Media query for smaller screens */
-@media (max-width: 768px) {
-    #image-section img {
-        height: auto; /* Reset the height to auto for smaller screens */
-    }
-}
-    
+
         /* Style for text on top of the image */
         .image-text {
-            position: absolute; /* Position the text absolutely within the container */
-            top: 50%; /* Position the text vertically centered */
-            left: 20%; /* Position the text horizontally centered */
-            transform: translate(-50%, -50%); /* Center the text precisely */
-            color: white; /* Text color */
-            font-size: 15px; /* Font size */
-            font-weight:light; /* Font weight */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow effect to improve readability */
+            color: white;
+            font-size: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             max-width: 30%;
-          
+            margin-left: 20%;
         }
-        @media screen and (max-width: 768px) {
-            .image-text {
-                font-size: 7px; /* Decrease font size for smaller screens */
-                max-width: 45%; /* Adjust the width of the text for smaller screens */
-                top: 15%; /* Adjust the top position for smaller screens */
-                left:30%;
-            }
-        }
-            /* Style for "Go back to Home Page" link */
-            .home-link {
-            position: absolute;
-                top:90%;
-                left:53%;
+
+        /* Style for "Go back to Home Page" link */
+        .home-link {
             color: white;
             text-decoration: none;
             font-size: 16px;
         }
-        @media screen and (max-width: 768px) {
-            .home-link {
-                font-size: 12px; /* Decrease font size for smaller screens */
-               
-                top: 25%; /* Adjust the top position for smaller screens */
-                left:67%;
-            }
+
+        /* Style for form button */
+        .btn-submit {
+            margin-top: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
         }
-        
     </style>
 </head>
 <body>
-
-
 <main>
     <div class="container-fluid">
         <!-- Image Section -->
@@ -94,22 +56,23 @@
                 <section id="repair-form">
                     <h2>Repair Form</h2>
                     <?php
-                    // Database connection
-                    $servername = "localhost";
-                    $username = "root"; // Your MySQL username
-                    $password = ""; // this is the default password
-                    $dbname = "ifixit";
+                    $thank_you_message = "";
 
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    // Check if form is submitted
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        // Database connection
+                        $servername = "localhost";
+                        $username = "root"; // Your MySQL username
+                        $password = ""; // this is the default password
+                        $dbname = "ifixit";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
                         // Prepare data for insertion
                         $name = $_POST['name'];
                         $email = isset($_POST['email']) ? $_POST['email'] : "";
@@ -118,6 +81,9 @@
                         $brand = $_POST['device_brand'];
                         $issue_description = $_POST['issue_description'];
                         $gender = $_POST['gender'];
+                        $appointment_date = $_POST['appointment_date'];
+                        $appointment_time = $_POST['appointment_time'];
+                        $employee_id = $_POST['employee']; // Get the selected employee ID
 
                         // Insert data into Customer table
                         $sql_customer = "INSERT INTO Customer (name, email, phone_number, address, gender) 
@@ -132,13 +98,27 @@
                                             VALUES ('$brand', '$issue_description', '$customer_id')";
 
                             if ($conn->query($sql_device) === TRUE) {
-                                echo "<script>alert('Submitted successfully');</script>";
+                                // Insert data into Appointment table
+                                $sql_appointment = "INSERT INTO appointment (customer_id, customer_name, customer_email, appointment_date, appointment_time, employee_id)
+                                                    VALUES ('$customer_id', '$name', '$email', '$appointment_date', '$appointment_time', '$employee_id')";
+
+                                if ($conn->query($sql_appointment) === TRUE) {
+                                    $thank_you_message = "Thank you for submitting the form!";
+                                    // Redirect to a thank you page or any other page
+                                    // header("Location: thank_you.php");
+                                    // exit(); // Stop executing the script
+                                } else {
+                                    $thank_you_message = "Error: " . $sql_appointment . "<br>" . $conn->error;
+                                }
                             } else {
-                                echo "Error: " . $sql_device . "<br>" . $conn->error;
+                                $thank_you_message = "Error: " . $sql_device . "<br>" . $conn->error;
                             }
                         } else {
-                            echo "Error: " . $sql_customer . "<br>" . $conn->error;
+                            $thank_you_message = "Error: " . $sql_customer . "<br>" . $conn->error;
                         }
+
+                        // Close connection
+                        $conn->close();
                     }
                     ?>
 
@@ -173,8 +153,46 @@
                                     <input type="radio" id="other" name="gender" value="Other" />
                                     <label for="other">Other</label>
 
-                                    <button  class="btn btn-dark">Submit</button>
+                                    <!-- Appointment information -->
+                                    <label for="appointment_date">Appointment Date:</label>
+                                    <input type="date" id="appointment_date" name="appointment_date" required/>
+
+                                    <label for="appointment_time">Appointment Time:</label>
+                                    <input type="time" id="appointment_time" name="appointment_time" required/>
+
+                                    <!-- Employee selection -->
+                                    <label for="employee">Select Employee:</label>
+                                    <select id="employee" name="employee" required>
+                                        <option value="">Select an employee</option>
+                                        <?php
+                                        // Fetch employees from the database
+                                        $servername = "localhost";
+                                        $username = "root"; // Your MySQL username
+                                        $password = ""; // this is the default password
+                                        $dbname = "ifixit";
+
+                                        // Create connection
+                                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                        // Check connection
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        }
+
+                                        $sql_employees = "SELECT * FROM employee";
+                                        $result_employees = $conn->query($sql_employees);
+                                        if ($result_employees->num_rows > 0) {
+                                            while ($row = $result_employees->fetch_assoc()) {
+                                                echo "<option value='" . $row["employee_id"] . "'>" . $row["first_name"] . " " . $row["last_name"] . "</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn-submit">Submit</button>
                                 </form>
+                                <p><?php echo $thank_you_message; ?></p>
                             </div>
                         </div>
                     </div>
@@ -183,8 +201,6 @@
             </div>
         </section>
     </div>
-    
 </main>
-<script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB
+</body>
+</html>

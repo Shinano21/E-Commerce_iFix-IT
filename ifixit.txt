@@ -44,11 +44,13 @@ CREATE TABLE `employee` (
   `phone_number` VARCHAR(20),
   `address` VARCHAR(255),
   `date_of_birth` DATE,
-  `position_id` INT(11),
-  `schedule_id` INT(11),
+  `schedule_time` VARCHAR(50),
+  `schedule_days` TEXT,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`employee_id`)
 );
+
+
 
 -- Table for feedback
 CREATE TABLE `feedback` (
@@ -81,11 +83,21 @@ CREATE TABLE `repairassignment` (
   FOREIGN KEY (`device_id`) REFERENCES `device` (`device_id`)
 );
 
--- Table for schedules
-CREATE TABLE `schedule` (
-  `schedule_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `schedule_name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`schedule_id`)
+-- Table for appointments
+CREATE TABLE `appointment` (
+  `appointment_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` INT(11),
+  `customer_name` VARCHAR(255),
+  `customer_email` VARCHAR(255),
+  `appointment_date` DATE,
+  `appointment_time` TIME,
+  `employee_id` INT(11),
+  `employee_name` VARCHAR(255),
+  `status` VARCHAR(20),
+  `drop_off_date` DATE,
+  PRIMARY KEY (`appointment_id`),
+  FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 );
 
 -- Table for transactions
