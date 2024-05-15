@@ -10,20 +10,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle search
+// Initialize variables
 $search_query = "";
-if(isset($_GET['search'])){
-    $search_query = $_GET['search'];
-}
-
-// Query to fetch customer information with repair status and pickup date
 $sql = "SELECT c.name, r.repair_status, r.pickup_date, CONCAT(e.first_name, ' ', e.last_name) AS employee_name
         FROM customer c
         LEFT JOIN device d ON c.customer_id = d.customer_id
         LEFT JOIN repairassignment r ON d.device_id = r.device_id
         LEFT JOIN employee e ON r.emp_first_name = e.first_name AND r.emp_last_name = e.last_name
-        WHERE c.name LIKE '%$search_query%'
         ORDER BY c.name";
+
+// Handle search
+if(isset($_GET['search'])){
+    $search_query = $_GET['search'];
+    $sql = "SELECT c.name, r.repair_status, r.pickup_date, CONCAT(e.first_name, ' ', e.last_name) AS employee_name
+            FROM customer c
+            LEFT JOIN device d ON c.customer_id = d.customer_id
+            LEFT JOIN repairassignment r ON d.device_id = r.device_id
+            LEFT JOIN employee e ON r.emp_first_name = e.first_name AND r.emp_last_name = e.last_name
+            WHERE c.name LIKE '%$search_query%'
+            ORDER BY c.name";
+}
 
 $result = $conn->query($sql);
 
