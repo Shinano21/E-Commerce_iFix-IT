@@ -63,6 +63,25 @@ if(isset($_GET['id'])) {
         } elseif ($result_device->num_rows > 0) {
             $device = $result_device->fetch_assoc();
         }
+
+        // Fetch appointment data associated with the customer
+        $sql_appointment = "SELECT * FROM appointment WHERE customer_id=$customer_id";
+        $result_appointment = $conn->query($sql_appointment);
+        if ($result_appointment === false) {
+            echo "Error executing appointment query: " . $conn->error;
+        } elseif ($result_appointment->num_rows > 0) {
+            $appointment = $result_appointment->fetch_assoc();
+            
+            // Fetch employee data associated with the appointment
+            $employee_id = $appointment['employee_id'];
+            $sql_employee = "SELECT * FROM employee WHERE employee_id=$employee_id";
+            $result_employee = $conn->query($sql_employee);
+            if ($result_employee === false) {
+                echo "Error executing employee query: " . $conn->error;
+            } elseif ($result_employee->num_rows > 0) {
+                $employee = $result_employee->fetch_assoc();
+            }
+        }
     } else {
         echo "Customer not found.";
     }
@@ -80,12 +99,6 @@ if(isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <body>
-<!-- <header>
-    <div class="header-content">
-        <h1>iFixIT - Edit Customer</h1>
-      
-    </div>
-</header> --><br><br>
 <main>
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
         <section id="edit-customer-form">
@@ -145,20 +158,38 @@ if(isset($_GET['id'])) {
                     <textarea id="issue" name="issue_description" class="form-control" required><?php echo isset($device['issue_description']) ? $device['issue_description'] : ''; ?></textarea>
                 </div>
 
+                <!-- Display appointment details -->
+                <?php if(isset($appointment) && $appointment !== null): ?>
+                <div class="mb-3">
+                    <label class="form-label text-black">Appointment Information:</label><br />
+                    <p><strong>Date:</strong> <?php echo $appointment['appointment_date']; ?></p>
+                    <p><strong>Time:</strong> <?php echo $appointment['appointment_time']; ?></p>
+                   
+                </div>
+                <?php endif; ?>
+
+                <!-- Display employee in charge details -->
+                <?php if(isset($employee) && $employee !== null): ?>
+                <div class="mb-3">
+                    <label class="form-label text-black">Employee in Charge:</label><br />
+                    <p><strong>Name:</strong> <?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?></p>
+                    <p><strong>Email:</strong> <?php echo $employee['email']; ?></p>
+                    <p><strong>Phone Number:</strong> <?php echo $employee['phone_number']; ?></p>
+                </div>
+                <?php endif; ?>
+
                 <button type="submit" class="btn btn-primary">Update</button>
                 <div class="text-end">
-        <a href="customer.php" class="btn btn-secondary">Go back</a>
-    </div>
+                    <a href="customer.php" class="btn btn-secondary">Go back</a>
+                </div>
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
             <?php endif; ?>
         </section>
     </div>
-    
 </main>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-

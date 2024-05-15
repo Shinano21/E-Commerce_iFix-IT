@@ -44,9 +44,9 @@
           </div>
         </div>
       </nav>
-    </header>
+</header>
 
-    <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
             <div id="sidebar" class="bg-dark">
@@ -59,7 +59,7 @@
                     <li><a href="transaction.php">Transactions</a></li>
                     <li><a href="employee.php">Employees</a></li>
                     <li><a href="repas.php">Repair Assignment</a></li>
-                     <li><a href="Feedash.php">Feedbacks</a></li>
+                    <li><a href="Feedash.php">Feedbacks</a></li>
                 </ul>
             </div>
         </div>
@@ -75,54 +75,61 @@
                             <th scope="col">Address</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Brand</th>
-                           
                             <th scope="col">Issue Description</th>
+                            <th scope="col">Appointment Date</th>
+                            <th scope="col">Appointment Time</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Operations</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "ifixit";
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "ifixit";
 
-                            // Create connection
-                            $conn = new mysqli($servername, $username, $password, $dbname);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
 
-                            // Check connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        $sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.model, d.issue_description, a.appointment_date, a.appointment_time, a.status
+                                FROM customer c
+                                JOIN device d ON c.customer_id = d.customer_id
+                                LEFT JOIN appointment a ON c.customer_id = a.customer_id";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $row['customer_id'] . '</td>';
+                                echo '<td>' . $row['name'] . '</td>';
+                                echo '<td>' . $row['email'] . '</td>';
+                                echo '<td>' . $row['phone_number'] . '</td>';
+                                echo '<td>' . $row['address'] . '</td>';
+                                echo '<td>' . $row['gender'] . '</td>';
+                                echo '<td>' . $row['brand'] . '</td>';
+                                echo '<td>' . $row['issue_description'] . '</td>';
+                                echo '<td>' . $row['appointment_date'] . '</td>';
+                                echo '<td>' . $row['appointment_time'] . '</td>';
+                                echo '<td>' . $row['status'] . '</td>';
+                                echo '<td>';
+                                echo '<div class="btn-group" role="group" aria-label="Operations">';
+                                echo '<a href="edit_customer.php?id=' . $row['customer_id'] . '" class="btn btn-secondary">Edit</a>';
+                                echo '<a href="delete_customer.php?id=' . $row['customer_id'] . '" class="btn btn-dark">Delete</a>';
+                                echo '</div>';
+                                echo '</td>';
+                                echo '</tr>';
                             }
-
-                            $sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.model, d.issue_description FROM customer c JOIN device d ON c.customer_id = d.customer_id";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<tr>';
-                                    echo '<td>' . $row['customer_id'] . '</td>';
-                                    echo '<td>' . $row['name'] . '</td>';
-                                    echo '<td>' . $row['email'] . '</td>';
-                                    echo '<td>' . $row['phone_number'] . '</td>';
-                                    echo '<td>' . $row['address'] . '</td>';
-                                    echo '<td>' . $row['gender'] . '</td>';
-                                    echo '<td>' . $row['brand'] . '</td>';
-                                    // echo '<td>' . $row['model'] . '</td>';
-                                    echo '<td>' . $row['issue_description'] . '</td>';
-                                    echo '<td>';
-                                    echo '<div class="btn-group" role="group" aria-label="Operations">';
-                                    echo '<a href="edit_customer.php?id=' . $row['customer_id'] . '" class="btn btn-secondary">Edit</a>';
-                                    echo '<a href="delete_customer.php?id=' . $row['customer_id'] . '" class="btn btn-dark">Delete</a>';
-                                    echo '</div>';
-                                    echo '</td>';
-                                    echo '</tr>';
-                                }
-                            } else {
-                                echo "<tr><td colspan='10'>0 results</td></tr>";
-                            }
-                            $conn->close();
-                            ?>
+                        } else {
+                            echo "<tr><td colspan='12'>0 results</td></tr>";
+                        }
+                        $conn->close();
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -131,23 +138,15 @@
 </div>
 
 <script>
-      document.getElementById("logout").addEventListener("click", function () {
-        // Redirect to the login page or perform logout actions
-        window.location.href = "main.html";
-      });
-    </script>
-       <script>
-      document.getElementById("logout").addEventListener("click", function () {
-        // Redirect to the login page or perform logout actions
-        window.location.href = "main.html";
-      });
-    </script>
-
-       
+document.getElementById("logout").addEventListener("click", function () {
+    // Redirect to the login page or perform logout actions
+    window.location.href = "main.html";
+});
+</script>
 <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+></script>
 </body>
 </html>
