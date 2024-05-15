@@ -21,6 +21,6 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 
 // Redirect back to the list of transactions
-header("Location: list_transactions.php");
+header("Location: transaction.php");
 exit();
 ?>

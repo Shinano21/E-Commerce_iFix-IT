@@ -80,18 +80,14 @@ if(isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <body>
-<header>
+<!-- <header>
     <div class="header-content">
         <h1>iFixIT - Edit Customer</h1>
-        <!-- Navigation links -->
+      
     </div>
-</header>
+</header> --><br><br>
 <main>
-<<<<<<< HEAD
-    <div class="container mt-5" style="background-color: rgba(255, 255, 255, 0.5); width:600px;">
-=======
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
         <section id="edit-customer-form">
             <?php if(isset($_GET['message']) && $_GET['message'] === 'updated'): ?>
             <p class="alert alert-success">Customer details updated successfully.</p>
@@ -101,59 +97,20 @@ if(isset($_GET['id'])) {
             <?php if(isset($customer) && $customer !== null): ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <input type="hidden" name="customer_id" value="<?php echo $customer['customer_id']; ?>">
-<<<<<<< HEAD
-                
-                <div class="row">
-                    <!-- Left Column for Personal Information -->
-                    <div class="col">
-=======
                 <div class="row">
                     <div class="col-md-6">
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
                         <div class="mb-3">
                             <label for="name" class="form-label text-black">Name:</label>
                             <input type="text" id="name" name="name" value="<?php echo isset($customer['name']) ? $customer['name'] : ''; ?>" class="form-control" required/>
                         </div>
-<<<<<<< HEAD
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label text-black">Email (If Optional):</label>
-                            <input type="email" id="email" name="email" value="<?php echo isset($customer['email']) ? $customer['email'] : ''; ?>" class="form-control"/>
-                        </div>
-
-=======
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
                         <div class="mb-3">
                             <label for="contact" class="form-label text-black">Contact Number:</label>
                             <input type="text" id="contact" name="contact" value="<?php echo isset($customer['phone_number']) ? $customer['phone_number'] : ''; ?>" class="form-control" required/>
                         </div>
-<<<<<<< HEAD
-                    </div>
-
-                    <!-- Right Column for Device Information -->
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="address" class="form-label text-black">Address:</label>
-                            <textarea id="address" name="address" class="form-control" required><?php echo isset($customer['address']) ? $customer['address'] : ''; ?></textarea>
-                        </div>
-
-=======
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
                         <div class="mb-3">
                             <label for="device-brand" class="form-label text-black">Device Brand:</label>
                             <input type="text" id="device-brand" name="device_brand" value="<?php echo isset($device['brand']) ? $device['brand'] : ''; ?>" class="form-control" required/>
                         </div>
-<<<<<<< HEAD
-
-                        <div class="mb-3">
-                            <label for="gender" class="form-label text-black">Gender:</label><br />
-                            <input type="radio" id="male" name="gender" value="Male" <?php if(isset($customer['gender']) && $customer['gender'] === "Male") echo "checked"; ?> class="form-check-input" required />
-                            <label for="male" class="form-check-label text-black">Male</label>
-                            <input type="radio" id="female" name="gender" value="Female" <?php if(isset($customer['gender']) && $customer['gender'] === "Female") echo "checked"; ?> class="form-check-input" />
-                            <label for="female" class="form-check-label text-black">Female</label>
-                            <br><input type="radio" id="other" name="gender" value="Other" <?php if(isset($customer['gender']) && $customer['gender'] === "Other") echo "checked"; ?> class="form-check-input" />
-                            <label for="other" class="form-check-label text-black">Other</label>
-=======
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -178,43 +135,28 @@ if(isset($_GET['id'])) {
                                 <input type="radio" id="other" name="gender" value="Other" <?php if(isset($customer['gender']) && $customer['gender'] === "Other") echo "checked"; ?> class="form-check-input" />
                                 <label for="other" class="form-check-label text-black">Other</label>
                             </div>
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
                         </div>
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                <!-- Device Issue -->
-=======
                 <!-- Device form fields -->
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
                 <div class="mb-3">
                     <label for="issue" class="form-label text-black">Issue of the Device:</label>
                     <textarea id="issue" name="issue_description" class="form-control" required><?php echo isset($device['issue_description']) ? $device['issue_description'] : ''; ?></textarea>
                 </div>
 
-<<<<<<< HEAD
-                <button type="submit" style=" background-color: #343a40; color: white;" ">Update</button>
-=======
-                <button type="submit" class="btn btn-primary">Update</button>
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
+                <button type="submit" style=" background-color: #343a40; color: white;">Update</button>
+                <a href="customer.php" class="btn btn-secondary">Go back</a>
+    
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
             <?php endif; ?>
         </section>
     </div>
-<<<<<<< HEAD
-    <div class="text-center mt-3">
-        <a href="customer.php" class="btn btn-secondary">Go back</a>
-=======
-    <div class="text-end">
-        <a href="customer.php" class="btn btn-secondary">Go back to Customer Page</a>
->>>>>>> 606e7696a5bebd14c5b2b2584e9bd11acf83e659
-    </div>
+    
 </main>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
