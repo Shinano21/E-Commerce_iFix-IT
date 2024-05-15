@@ -6,73 +6,142 @@
     <title>About Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
     <style>
-      body {
-        
-        margin: 0; /* Remove default margin */
-        padding: 0; /* Remove default padding */
-      }
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('friends.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
 
-      .content {
-        color: white;
-        
-        max-width: 450px; /* Adjust maximum width of content */
-        padding: 20px; /* Add padding to content */
-      }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-      .mission {
-        position: absolute;
-        top: 20px; /* Position Mission section at the top */
-        left: 20px; /* Position Mission section at the left */
-      }
+        .content-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-      .vision {
-        position: absolute;
-        bottom: 50px; /* Position Vision section at the bottom */
-        right: 20px; /* Position Vision section at the right */
-      }
-      
-      /* Style for "Go back to Home Page" link */
-      .home-link {
-        position: absolute;
-        bottom: 30px; /* Adjust distance from the bottom */
-        right: 50px; /* Adjust distance from the right */
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        z-index: 1; /* Ensure the link appears above other content */
-      }
-      p{
-        text-align: center;
-      }
+        .content {
+            max-width: 450px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .profile {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .profile-description {
+            margin-top: 10px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        /* Style for "Go back to Home Page" link */
+        .home-link {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
     </style>
 </head>
-<body style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('friends.jpg'); background-repeat: no-repeat; background-position: center; background-attachment: fixed; background-size: cover;">
-    <div class="overlay"></div>
-    <div class="content mission">
-      <h1>Mission</h1>
-      <p>
-        The goal of iFixIT is to give excellent computer and laptop repair
-        services that satisfy the different needs of individuals, companies, and
-        communities. We seek to boost customer satisfaction by providing
-        efficient and dependable solutions, as well as creating job and revenue
-        prospects for service professionals, even in the face of economic
-        difficult pandemic conditions. Our commitment is to constantly improve
-        service quality and standards, ensuring the smooth operation of digital
-        devices and helping our clients to prosper in the ever-changing
-        electronic environment.
-      </p>
+<body>
+    <div class="container">
+        <div class="content-container">
+            <div class="content">
+                <h1>Mission</h1>
+                <p>
+                    The goal of iFixIT is to give excellent computer and laptop repair
+                    services that satisfy the different needs of individuals, companies, and
+                    communities. We seek to boost customer satisfaction by providing
+                    efficient and dependable solutions, as well as creating job and revenue
+                    prospects for service professionals, even in the face of economic
+                    difficult pandemic conditions. Our commitment is to constantly improve
+                    service quality and standards, ensuring the smooth operation of digital
+                    devices and helping our clients to prosper in the ever-changing
+                    electronic environment.
+                </p>
+            </div>
+            <div class="content">
+                <h1>Vision</h1>
+                <p>
+                    iFixIT envisions a world where people and businesses can embrace
+                    innovation without fear. We offer more than just repairs, aiming to
+                    empower clients with devices and knowledge. Through quality service and
+                    customer relationships, we redefine technical support, aiming to
+                    alleviate frustrations and empower users in the digital era.
+                </p>
+            </div>
+        </div>
+
+        <div class="profile">
+            <img src="your-profile-picture.jpg" alt="Profile Picture">
+            <div class="profile-description">
+                <h2>Your Name</h2>
+                <p>A short description about yourself goes here. Mention your role, experience, and any relevant information that you want to share with the visitors.</p>
+            </div>
+        </div>
+        <div class="profile">
+          <img src="your-profile-picture.jpg" alt="Profile Picture">
+          <div class="profile-description">
+              <h2>Your Name</h2>
+              <p>A short description about yourself goes here. Mention your role, experience, and any relevant information that you want to share with the visitors.</p>
+          </div>
+      </div>
+      <div class="profile">
+        <img src="your-profile-picture.jpg" alt="Profile Picture">
+        <div class="profile-description">
+            <h2>Your Name</h2>
+            <p>A short description about yourself goes here. Mention your role, experience, and any relevant information that you want to share with the visitors.</p>
+        </div>
     </div>
-    <div class="content vision">
-      <h1>Vision</h1>
-      <p>
-        iFixIT envisions a world where people and businesses can embrace
-        innovation without fear. We offer more than just repairs, aiming to
-        empower clients with devices and knowledge. Through quality service and
-        customer relationships, we redefine technical support, aiming to
-        alleviate frustrations and empower users in the digital era.
-      </p>
+    <div class="profile">
+      <img src="your-profile-picture.jpg" alt="Profile Picture">
+      <div class="profile-description">
+          <h2>Your Name</h2>
+          <p>A short description about yourself goes here. Mention your role, experience, and any relevant information that you want to share with the visitors.</p>
+      </div>
+  </div>
+
+        <a href="main.html" class="home-link">Go back to Home Page</a>
     </div>
-    <a href="main.html" class="home-link">Go back to Home Page</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
