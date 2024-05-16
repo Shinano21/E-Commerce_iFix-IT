@@ -37,6 +37,22 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        /* Style for the employee table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -154,13 +170,13 @@
                                     <label for="other">Other</label>
 
                                     <!-- Appointment information -->
-                                    <label for="appointment_date">Appointment Date:</label>
+                                    <label for="appointment_date">Drop Off Date:</label>
                                     <input type="date" id="appointment_date" name="appointment_date" required/>
 
-                                    <label for="appointment_time">Appointment Time:</label>
+                                    <label for="appointment_time">Drop Off Time:</label>
                                     <input type="time" id="appointment_time" name="appointment_time" required/>
 
-                                    <!-- Employee selection -->
+                                    <!-- Employee list -->
                                     <label for="employee">Select Employee:</label>
                                     <select id="employee" name="employee" required>
                                         <option value="">Select an employee</option>
@@ -183,7 +199,10 @@
                                         $result_employees = $conn->query($sql_employees);
                                         if ($result_employees->num_rows > 0) {
                                             while ($row = $result_employees->fetch_assoc()) {
-                                                echo "<option value='" . $row["employee_id"] . "'>" . $row["first_name"] . " " . $row["last_name"] . "</option>";
+                                                // Combine schedule time and days
+                                                $schedule_info = $row["schedule_time"] . " (" . $row["schedule_days"] . ")";
+                                                // Output employee name, schedule, and time as an option
+                                                echo "<option value='" . $row["employee_id"] . "'>" . $row["first_name"] . " " . $row["last_name"] . " - " . $schedule_info . "</option>";
                                             }
                                         }
                                         ?>

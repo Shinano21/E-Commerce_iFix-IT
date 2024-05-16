@@ -58,9 +58,13 @@ CREATE TABLE `feedback` (
   `name` VARCHAR(255) NOT NULL,
   `feedback_text` TEXT,
   `rating` INT(11),
+  `image` LONGBLOB,
+  `image_name` VARCHAR(255), -- Column to store the name of the image file
+  `image_type` VARCHAR(255), -- Column to store the MIME type of the image
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`feedback_id`)
 );
+
 
 -- Table for positions
 CREATE TABLE `position` (
