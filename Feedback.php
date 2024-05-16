@@ -6,6 +6,9 @@
   <title>iFixIT - Laptop Repair Service</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    /* Add your custom styles here */
+  </style>
 </head>
 <body>
   <header>
@@ -21,7 +24,7 @@
           </div>
           <a class="navbar-brand" href="#">iFixIT</a>
           <div class="navbar-nav">
-            <a class="nav-link" href="Feedback.php" id="feedback">Feedback</a>
+            <a class="nav-link" href="#feedback" id="feedback-link">Feedback</a>
           </div>
         </div>
       </div>
@@ -31,7 +34,7 @@
   <main>
     <div class="container">
       <h2 class="mt-5 mb-4">Feedback Form</h2>
-      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
           <input type="text" class="form-control" id="name" name="name" required>
@@ -43,6 +46,10 @@
         <div class="mb-3">
           <label for="rating" class="form-label">Rating:</label>
           <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Image:</label>
+          <input type="file" class="form-control" id="image" name="image">
         </div>
         <button type="submit" class="btn btn-primary">Submit Feedback</button>
       </form>
@@ -59,11 +66,22 @@
               $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
               $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-              $stmt = $conn->prepare("INSERT INTO Feedback (name, feedback_text, rating) VALUES (:name, :feedback, :rating)");
+              $stmt = $conn->prepare("INSERT INTO Feedback (name, feedback_text, rating, image_name, image_type, image_data) VALUES (:name, :feedback, :rating, :image_name, :image_type, :image_data)");
 
-              $stmt->bindParam(':name', $_POST['name']);
-              $stmt->bindParam(':feedback', $_POST['feedback']);
-              $stmt->bindParam(':rating', $_POST['rating']);
+              $name = $_POST['name'];
+              $feedback = $_POST['feedback'];
+              $rating = $_POST['rating'];
+
+              $image_name = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : null;
+              $image_type = isset($_FILES['image']['type']) ? $_FILES['image']['type'] : null;
+              $image_data = isset($_FILES['image']['tmp_name']) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+
+              $stmt->bindParam(':name', $name);
+              $stmt->bindParam(':feedback', $feedback);
+              $stmt->bindParam(':rating', $rating);
+              $stmt->bindParam(':image_name', $image_name);
+              $stmt->bindParam(':image_type', $image_type);
+              $stmt->bindParam(':image_data', $image_data, PDO::PARAM_LOB);
 
               $stmt->execute();
 
@@ -102,6 +120,10 @@
                 echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
                 echo "<p class='card-text'>" . $row['feedback_text'] . "</p>";
                 echo "<p class='card-text'><strong>Rating:</strong> " . $row['rating'] . "</p>";
+                if (!empty($row['image_data'])) {
+                    $imageData = base64_encode($row['image_data']);
+                    echo "<img src='data:" . $row['image_type'] . ";base64," . $imageData . "' class='img-fluid' />";
+                }
                 echo "</div>";
                 echo "</div>";
             }
@@ -114,72 +136,6 @@
       </div>
     </div>
   </main>
-
-  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <br />
-        <div class="modal-body">
-          <br />
-          <form id="login-form" method="POST" action="authenticate.php">
-            <!-- Change action to your PHP login processing script -->
-            <div class="mb-3">
-              <label for="username" class="form-label">Username:</label>
-              <input type="text" class="form-control" id="username" name="username" required />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password:</label>
-              <input type="password" class="form-control" id="password" name="password" required />
-            </div>
-            <button type="submit" style="background-color: #343a40; color: white">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const loginLink = document.getElementById("login-link");
-
-      // Show modal when login link is clicked
-      loginLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        var myModal = new bootstrap.Modal(document.getElementById("login-modal"));
-        myModal.show();
-      });
-
-      // Form submission handling
-      const loginForm = document.getElementById("login-form");
-      loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const formData = new FormData(loginForm);
-
-        // Send login credentials to server for authentication
-        fetch("login.php", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              // Redirect to admin page after successful login
-              window.location.href = "admin.html";
-            } else {
-              // Show error message if login fails
-              alert("Invalid username or password. Please try again.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      });
-    });
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
