@@ -24,9 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brand = $_POST['device_brand'];
     $issue_description = $_POST['issue_description'];
     $gender = $_POST['gender'];
+    $employee_id = $_POST['employee']; // Get the selected employee ID
 
     // Update Customer table
-    $sql_customer = "UPDATE customer SET name='$name', email='$email', phone_number='$phone_number', address='$address', gender='$gender' WHERE customer_id=$customer_id";
+    $sql_customer = "UPDATE customer SET name='$name', email='$email', phone_number='$phone_number', address='$address', gender='$gender', employee_id='$employee_id' WHERE customer_id=$customer_id";
 
     if ($conn->query($sql_customer) === TRUE) {
         // Update Device table if necessary
@@ -80,12 +81,6 @@ if(isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <body>
-<!-- <header>
-    <div class="header-content">
-        <h1>iFixIT - Edit Customer</h1>
-      
-    </div>
-</header> --><br><br>
 <main>
     <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
         <section id="edit-customer-form">
@@ -98,7 +93,7 @@ if(isset($_GET['id'])) {
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <input type="hidden" name="customer_id" value="<?php echo $customer['customer_id']; ?>">
                 <div class="row">
-                    <div class="col-md-6">
+                  <div class="col-md-6">
                         <div class="mb-3">
                             <label for="name" class="form-label text-black">Name:</label>
                             <input type="text" id="name" name="name" value="<?php echo isset($customer['name']) ? $customer['name'] : ''; ?>" class="form-control" required/>
@@ -135,19 +130,36 @@ if(isset($_GET['id'])) {
                                 <input type="radio" id="other" name="gender" value="Other" <?php if(isset($customer['gender']) && $customer['gender'] === "Other") echo "checked"; ?> class="form-check-input" />
                                 <label for="other" class="form-check-label text-black">Other</label>
                             </div>
+                        <div class="mb-3">
+                            <label for="employee" class="form-label text-black">Select Employee:</label>
+                            <select id="employee" name="employee" class="form-select" required>
+                                <option value="">Select an employee</option>
+                                <?php
+                                // Fetch employees from the database
+                                $sql_employees = "SELECT * FROM employee";
+                                $result_employees = $conn->query($sql_employees);
+                                if ($result_employees->num_rows > 0) {
+                                    while ($row = $result_employees->fetch_assoc()) {
+                                        // Combine first name and last name
+                                        $employee_name = $row["first_name"] . " " . $row["last_name"];
+                                        // Output employee name as an option
+                                        echo "<option value='" . $row["employee_id"] . "'";
+                                        // If the employee is currently assigned to the customer, mark the option as selected
+                                        if(isset($customer['employee_id']) && $customer['employee_id'] == $row['employee_id']) {
+                                            echo " selected";
+                                        }
+                                        echo ">" . $employee_name . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                 </div>
-
-                <!-- Device form fields -->
-                <div class="mb-3">
-                    <label for="issue" class="form-label text-black">Issue of the Device:</label>
-                    <textarea id="issue" name="issue_description" class="form-control" required><?php echo isset($device['issue_description']) ? $device['issue_description'] : ''; ?></textarea>
-                </div>
-
+                
+                <!-- Submit and Go back buttons -->
                 <button type="submit" style=" background-color: #343a40; color: white;">Update</button>
                 <a href="customer.php" class="btn btn-secondary">Go back</a>
-    
             </form>
             <?php else: ?>
             <p>Customer not found.</p>
