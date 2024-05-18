@@ -1,4 +1,6 @@
---database name:ifixit
+-- Create the database
+CREATE DATABASE ifixit;
+USE ifixit;
 
 -- Table for admins
 CREATE TABLE `admin` (
@@ -10,29 +12,6 @@ CREATE TABLE `admin` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `username` (`username`)
-);
-
--- Table for customers
-CREATE TABLE `customer` (
-  `customer_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255),
-  `phone_number` VARCHAR(20),
-  `address` VARCHAR(255),
-  `gender` ENUM('Male','Female','Other'),
-  PRIMARY KEY (`customer_id`)
-);
-
--- Table for devices
-CREATE TABLE `device` (
-  `device_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `brand` VARCHAR(255),
-  `model` VARCHAR(255),
-  `issue_description` TEXT,
-  `date_brought_in` DATE,
-  `customer_id` INT(11),
-  PRIMARY KEY (`device_id`),
-  FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
 );
 
 -- Table for employees
@@ -50,7 +29,30 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`employee_id`)
 );
 
+-- Table for customers
+CREATE TABLE `customer` (
+  `customer_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255),
+  `phone_number` VARCHAR(20),
+  `address` VARCHAR(255),
+  `gender` ENUM('Male','Female','Other'),
+  `employee_id` INT(11),
+  PRIMARY KEY (`customer_id`),
+  FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+);
 
+-- Table for devices
+CREATE TABLE `device` (
+  `device_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `brand` VARCHAR(255),
+  `model` VARCHAR(255),
+  `issue_description` TEXT,
+  `date_brought_in` DATE,
+  `customer_id` INT(11),
+  PRIMARY KEY (`device_id`),
+  FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
+);
 
 -- Table for feedback
 CREATE TABLE `feedback` (
@@ -64,8 +66,6 @@ CREATE TABLE `feedback` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`feedback_id`)
 );
-
-
 
 -- Table for positions
 CREATE TABLE `position` (
@@ -118,4 +118,3 @@ CREATE TABLE `transaction` (
   FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 );
-
