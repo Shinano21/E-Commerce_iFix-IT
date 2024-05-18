@@ -82,7 +82,7 @@
                                 <th>Date of Birth</th>
                                 <th>Schedule Time</th>
                                 <th>Schedule Days</th>
-                                <th>Created At</th>
+                               
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -120,7 +120,7 @@
                                     echo "<td>".$row['date_of_birth']."</td>";
                                     echo "<td>".$row['schedule_time']."</td>";
                                     echo "<td>".$row['schedule_days']."</td>";
-                                    echo "<td>".$row['created_at']."</td>";
+                                   
                                     echo "<td>";
                                     echo "<div class='btn-group' role='group' aria-label='Operations'>";
                                     echo "<a href='emp_edit.php?id=" . $row['employee_id'] . "' class='btn btn-secondary'>Edit</a>";
