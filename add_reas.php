@@ -31,15 +31,10 @@
             // Extract data from the form
             $employee_id = $_POST['employee_id'];
             $device_id = $_POST['device_id'];
-            $repair_status = $_POST['repair_status']; // This line is crucial for retrieving repair status
+            $repair_status = $_POST['repair_status'];
             $repair_date = $_POST['repair_date'];
             $pickup_date = $_POST['pickup_date'];
             $notes = $_POST['notes'];
-
-            // Prepare and execute the SQL statement to insert data
-            $sql = "INSERT INTO RepairAssignment (emp_first_name, emp_last_name, device_id, repair_status, repair_date, pickup_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssissis", $emp_first_name, $emp_last_name, $device_id, $repair_status, $repair_date, $pickup_date, $notes);
 
             // Get the employee's first and last name based on employee_id
             $query_employee = "SELECT first_name, last_name FROM Employee WHERE employee_id = ?";
@@ -51,11 +46,16 @@
             $emp_first_name = $row_employee['first_name'];
             $emp_last_name = $row_employee['last_name'];
 
+            // Prepare and execute the SQL statement to insert data
+            $sql = "INSERT INTO RepairAssignment (emp_first_name, emp_last_name, device_id, repair_status, repair_date, pickup_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssissss", $emp_first_name, $emp_last_name, $device_id, $repair_status, $repair_date, $pickup_date, $notes);
+
             if ($stmt->execute()) {
                 // Close prepared statements
                 $stmt->close();
                 $stmt_employee->close();
-                // Redirect to main.php
+                // Redirect to repas.php
                 header("Location: repas.php");
                 exit();
             } else {
@@ -122,12 +122,12 @@
 
                     <div class="mb-3">
                         <label for="repair_date" class="form-label">Repair Date:</label>
-                        <input type="date" name="repair_date" class="form-control">
+                        <input type="date" name="repair_date" class="form-control" required>
                     </div>
 <br>
                     <div class="mb-3">
                         <label for="pickup_date" class="form-label">Pickup Date:</label>
-                        <input type="date" name="pickup_date" class="form-control">
+                        <input type="date" name="pickup_date" class="form-control" required>
                     </div>
                 </div>
             </div>
