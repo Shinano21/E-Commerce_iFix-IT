@@ -76,51 +76,60 @@
                             <th scope="col">Gender</th>
                             <th scope="col">Brand</th>
                             <th scope="col">Issue Description</th>
+                            <th scope="col">Employee in charge</th>
                             <th scope="col">Operations</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "ifixit";
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ifixit";
 
-                            // Create connection
-                            $conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-                            // Check connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-                            $sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.issue_description FROM customer c JOIN device d ON c.customer_id = d.customer_id";
-                            $result = $conn->query($sql);
+$sql = "SELECT c.customer_id, c.name, c.email, c.phone_number, c.address, c.gender, d.brand, d.issue_description, e.first_name AS emp_first_name, e.last_name AS emp_last_name
+        FROM customer c
+        JOIN device d ON c.customer_id = d.customer_id
+        LEFT JOIN repairassignment ra ON d.device_id = ra.device_id
+        LEFT JOIN employee e ON c.employee_id = e.employee_id"; // Updated join condition to use employee_id from customer table
 
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<tr>';
-                                    echo '<td>' . $row['customer_id'] . '</td>';
-                                    echo '<td>' . $row['name'] . '</td>';
-                                    echo '<td>' . $row['email'] . '</td>';
-                                    echo '<td>' . $row['phone_number'] . '</td>';
-                                    echo '<td>' . $row['address'] . '</td>';
-                                    echo '<td>' . $row['gender'] . '</td>';
-                                    echo '<td>' . $row['brand'] . '</td>';
-                                    echo '<td>' . $row['issue_description'] . '</td>';
-                                    echo '<td>';
-                                    echo '<div class="btn-group" role="group" aria-label="Operations">';
-                                    echo '<a href="edit_customer.php?id=' . $row['customer_id'] . '" class="btn btn-secondary">Edit</a>';
-                                    echo '<a href="delete_customer.php?id=' . $row['customer_id'] . '" class="btn btn-dark">Delete</a>';
-                                    echo '</div>';
-                                    echo '</td>';
-                                    echo '</tr>';
-                                }
-                            } else {
-                                echo "<tr><td colspan='9'>0 results</td></tr>";
-                            }
-                            $conn->close();
-                            ?>
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>' . $row['customer_id'] . '</td>';
+        echo '<td>' . $row['name'] . '</td>';
+        echo '<td>' . $row['email'] . '</td>';
+        echo '<td>' . $row['phone_number'] . '</td>';
+        echo '<td>' . $row['address'] . '</td>';
+        echo '<td>' . $row['gender'] . '</td>';
+        echo '<td>' . $row['brand'] . '</td>';
+        echo '<td>' . $row['issue_description'] . '</td>';
+        echo '<td>' . $row['emp_first_name'] . ' ' . $row['emp_last_name'] . '</td>'; // Display employee in charge
+        echo '<td>';
+        echo '<div class="btn-group" role="group" aria-label="Operations">';
+        echo '<a href="edit_customer.php?id=' . $row['customer_id'] . '" class="btn btn-secondary">Edit</a>';
+        echo '<a href="delete_customer.php?id=' . $row['customer_id'] . '" class="btn btn-dark">Delete</a>';
+        echo '</div>';
+        echo '</td>';
+        echo '</tr>';
+    }
+} else {
+    echo "<tr><td colspan='10'>0 results</td></tr>";
+}
+$conn->close();
+?>
+
+
                     </tbody>
                 </table>
             </div>
