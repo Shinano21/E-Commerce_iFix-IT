@@ -86,149 +86,162 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <section id="repair-form">
-                    <h2>Repair Form</h2>
-                    <?php
-                    $thank_you_message = "";
+               <section id="repair-form">
+    <h2>Repair Form</h2>
+    <?php
+    $thank_you_message = "";
 
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        // Database connection
-                        $servername = "localhost";
-                        $username = "root"; // Your MySQL username
-                        $password = ""; // this is the default password
-                        $dbname = "ifixit";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Database connection
+        $servername = "localhost";
+        $username = "root"; // Your MySQL username
+        $password = ""; // this is the default password
+        $dbname = "ifixit";
 
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-                        // Prepare data for insertion
-                        $name = $_POST['name'];
-                        $email = isset($_POST['email']) ? $_POST['email'] : "";
-                        $phone_number = $_POST['contact'];
-                        $address = $_POST['address'];
-                        $brand = $_POST['device_brand'];
-                        $issue_description = $_POST['issue_description'];
-                        $gender = $_POST['gender'];
-                        $appointment_date = $_POST['appointment_date'];
-                        $appointment_time = $_POST['appointment_time'];
-                        $employee_id = $_POST['employee']; // Get the selected employee ID
+        // Prepare data for insertion
+        // Prepare data for insertion
+            $name = $_POST['name'];
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $phone_number = $_POST['contact'];
+            $address = $_POST['address'];
+            $brand = $_POST['device_brand'];
+            $issue_description = $_POST['issue_description'];
+            $gender = $_POST['gender'];
+            $appointment_date = $_POST['appointment_date'];
+            $appointment_time = $_POST['appointment_time'];
+            $employee_id = $_POST['employee']; // Get the selected employee ID
 
-                        // Insert data into Customer table
-                        $sql_customer = "INSERT INTO Customer (name, email, phone_number, address, gender) 
-                                        VALUES ('$name', '$email', '$phone_number', '$address', '$gender')";
+            // Insert data into Customer table
+            $sql_customer = "INSERT INTO customer (name, email, phone_number, address, gender, employee_id) 
+                            VALUES ('$name', '$email', '$phone_number', '$address', '$gender', '$employee_id')";
 
-                        if ($conn->query($sql_customer) === TRUE) {
-                            // Retrieve the auto-generated customer_id
-                            $customer_id = $conn->insert_id;
+        if ($conn->query($sql_customer) === TRUE) {
+            // Retrieve the auto-generated customer_id
+            $customer_id = $conn->insert_id;
 
-                            // Insert data into Device table
-                            $sql_device = "INSERT INTO Device (brand, issue_description, customer_id)
-                                            VALUES ('$brand', '$issue_description', '$customer_id')";
+            // Insert data into Device table
+            $sql_device = "INSERT INTO device (brand, issue_description, customer_id)
+                            VALUES ('$brand', '$issue_description', '$customer_id')";
 
-                            if ($conn->query($sql_device) === TRUE) {
-                                // Insert data into Appointment table
-                                $sql_appointment = "INSERT INTO appointment (customer_id, customer_name, customer_email, appointment_date, appointment_time, employee_id)
-                                                    VALUES ('$customer_id', '$name', '$email', '$appointment_date', '$appointment_time', '$employee_id')";
+            if ($conn->query($sql_device) === TRUE) {
+                // Insert data into Appointment table
+                $sql_appointment = "INSERT INTO appointment (customer_id, customer_name, customer_email, appointment_date, appointment_time, employee_id)
+                                    VALUES ('$customer_id', '$name', '$email', '$appointment_date', '$appointment_time', '$employee_id')";
 
-                                if ($conn->query($sql_appointment) === TRUE) {
-                                    $thank_you_message = "Thank you for submitting the form!";
-                                } else {
-                                    $thank_you_message = "Error: " . $sql_appointment . "<br>" . $conn->error;
-                                }
-                            } else {
-                                $thank_you_message = "Error: " . $sql_device . "<br>" . $conn->error;
-                            }
-                        } else {
-                            $thank_you_message = "Error: " . $sql_customer . "<br>" . $conn->error;
-                        }
+                if ($conn->query($sql_appointment) === TRUE) {
+                    $thank_you_message = "Thank you for submitting the form!";
+                } else {
+                    $thank_you_message = "Error: " . $sql_appointment . "<br>" . $conn->error;
+                }
+            } else {
+                $thank_you_message = "Error: " . $sql_device . "<br>" . $conn->error;
+            }
+        } else {
+            $thank_you_message = "Error: " . $sql_customer . "<br>" . $conn->error;
+        }
 
-                        // Close connection
-                        $conn->close();
-                    }
-                    ?>
+        // Close connection
+        $conn->close();
+    }
+    ?>
 
-                    <div class="container">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name:</label>
-                                <input type="text" id="name" name="name" class="form-control" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email (Optional):</label>
-                                <input type="email" id="email" name="email" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact" class="form-label">Contact Number:</label>
-                                <input type="text" id="contact" name="contact" class="form-control" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address:</label>
-                                <textarea id="address" name="address" class="form-control" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="device-brand" class="form-label">Device Brand:</label>
-                                <input type="text" id="device-brand" name="device_brand" class="form-control" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="issue" class="form-label">Issue of the Device:</label>
-                                <textarea id="issue" name="issue_description" class="form-control" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="gender" class="form-label">Gender:</label>
-                                <div>
-                                    <input type="radio" id="male" name="gender" value="Male" required />
-                                    <label for="male">Male</label>
-                                    <input type="radio" id="female" name="gender" value="Female" />
-                                    <label for="female">Female</label>
-                                    <input type="radio" id="other" name="gender" value="Other" />
-                                    <label for="other">Other</label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="appointment_date" class="form-label">Drop Off Date:</label>
-                                <input type="date" id="appointment_date" name="appointment_date" class="form-control" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="appointment_time" class="form-label">Drop Off Time:</label>
-                                <input type="time" id="appointment_time" name="appointment_time" class="form-control" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="employee" class="form-label">Select Employee:</label>
-                                <select id="employee" name="employee" class="form-select" required>
-                                    <option value="">Select an employee</option>
-                                    <?php
-                                    // Fetch employees from the database
-                                    $servername = "localhost";
-                                    $username = "root"; // Your MySQL username
-                                    $password = ""; // this is the default password
-                                    $dbname = "ifixit";
+    <div class="container">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <!-- Form fields -->
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required/>
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email (Optional):</label>
+                <input type="email" id="email" name="email" class="form-control"/>
+            </div>
+            <!-- Contact Number -->
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact Number:</label>
+                <input type="text" id="contact" name="contact" class="form-control" required/>
+            </div>
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <textarea id="address" name="address" class="form-control" required></textarea>
+            </div>
+            <!-- Device Brand -->
+            <div class="mb-3">
+                <label for="device-brand" class="form-label">Device Brand:</label>
+                <input type="text" id="device-brand" name="device_brand" class="form-control" required/>
+            </div>
+            <!-- Issue Description -->
+            <div class="mb-3">
+                <label for="issue" class="form-label">Issue of the Device:</label>
+                <textarea id="issue" name="issue_description" class="form-control" required></textarea>
+            </div>
+            <!-- Gender -->
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender:</label>
+                <div>
+                    <input type="radio" id="male" name="gender" value="Male" required />
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="Female" />
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="Other" />
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            <!-- Appointment Date -->
+            <div class="mb-3">
+                <label for="appointment_date" class="form-label">Drop Off Date:</label>
+                <input type="date" id="appointment_date" name="appointment_date" class="form-control" required/>
+            </div>
+            <!-- Appointment Time -->
+            <div class="mb-3">
+                <label for="appointment_time" class="form-label">Drop Off Time:</label>
+                <input type="time" id="appointment_time" name="appointment_time" class="form-control" required/>
+            </div>
+            <!-- Select Employee -->
+            <div class="mb-3">
+                <label for="employee" class="form-label">Select Employee:</label>
+              <select id="employee" name="employee" class="form-select" required>
+    <option value="">Select an employee</option>
+    <?php
+    // Fetch employees from the database
+    $servername = "localhost";
+    $username = "root"; // Your MySQL username
+    $password = ""; // this is the default password
+    $dbname = "ifixit";
 
-                                    // Create connection
-                                    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-                                    // Check connection
-                                    if ($conn->connect_error) {
-                                        die("Connection failed: " . $conn->connect_error);
-                                    }
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-                                    $sql_employees = "SELECT * FROM employee";
-                                    $result_employees = $conn->query($sql_employees);
-                                    if ($result_employees->num_rows > 0) {
-                                        while ($row = $result_employees->fetch_assoc()) {
-                                            // Combine schedule time and days
-                                            $schedule_info = $row["schedule_time"] . " (" . $row["schedule_days"] . ")";
-                                            // Output employee name, schedule, and time as an option
-                                            echo "<option value='" . $row["employee_id"] . "'>" . $row["first_name"] . " " . $row["last_name"] . " - " . $schedule_info . "</option>";
-                                        }
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </select>
+    $sql_employees = "SELECT * FROM employee";
+    $result_employees = $conn->query($sql_employees);
+    if ($result_employees->num_rows > 0) {
+        while ($row = $result_employees->fetch_assoc()) {
+            // Combine schedule time and days
+            $schedule_info = $row["schedule_time"] . " (" . $row["schedule_days"] . ")";
+            // Output employee name, schedule, and time as an option
+            echo "<option value='" . $row["employee_id"] . "'>" . $row["first_name"] . " " . $row["last_name"] . " - " . $schedule_info . "</option>";
+        }
+    }
+    $conn->close();
+    ?>
+</select>
+
                             </div>
                             <button type="submit" style=" background-color: #343a40; color: white;" class="btn btn-primary btn-submit">Submit</button>
                         </form>
