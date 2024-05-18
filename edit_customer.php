@@ -82,7 +82,7 @@ if(isset($_GET['id'])) {
 </head>
 <body>
 <main>
-    <div class="container" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
+    <div class="container mt-5" style="background-color: rgba(255, 255, 255, 0.5); width:500px;">
         <section id="edit-customer-form">
             <?php if(isset($_GET['message']) && $_GET['message'] === 'updated'): ?>
             <p class="alert alert-success">Customer details updated successfully.</p>
@@ -158,8 +158,8 @@ if(isset($_GET['id'])) {
                 </div>
                 
                 <!-- Submit and Go back buttons -->
-                <button type="submit" style=" background-color: #343a40; color: white;">Update</button>
-                <a href="customer.php" class="btn btn-secondary">Go back</a>
+                <button type="submit" style=" background-color: #343a40; color: white; width:100px; margin-left:10px">Update</button>
+                <a href="customer.php" class="btn btn-secondary" style="width:100px; margin-left:10px;">Go back</a>
             </form>
             <?php else: ?>
             <p>Customer not found.</p>

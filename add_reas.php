@@ -139,7 +139,8 @@
             </div>
 
             <button type="submit" name="add" style="background-color: #343a40; color: white;" class="btn">Add Repair Assignment</button>
-            <a href="repas.php">Go Back</a>
+            <a href="repas.php" style="color: black; text-decoration: none; font-size:20px;">Go Back</a>
+
 
         </form>
     </div>

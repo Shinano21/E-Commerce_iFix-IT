@@ -43,7 +43,6 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
  
    <style>
-
         .container {
             background-color: rgba(255, 255, 255, 0.5);
             padding: 20px;
@@ -51,6 +50,9 @@ $result = $conn->query($sql);
         }
         .search-form {
             margin-bottom: 20px;
+        }
+        .home-link {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -63,7 +65,7 @@ $result = $conn->query($sql);
     <form method="GET" class="search-form">
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="search" placeholder="Search by customer name" value="<?php echo $search_query; ?>">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+            <button class="btn btn-secondary" style="background-color: grey; color: white;" type="submit" id="button-addon2">Search</button>
         </div>
     </form>
 
@@ -94,11 +96,16 @@ $result = $conn->query($sql);
         </tbody>
     </table>
     
+    <!-- Centered Go back to Home Page button -->
+    <div class="text-center">
+        <a href="main.html" class="btn btn-dark home-link">Go back to Home Page</a>
+    </div>
 </div>
-<a href="main.html" style=" background-color: white; color: black;" class="home-link">Go back to Home Page</a>
+
 <?php
 $conn->close();
 ?>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
