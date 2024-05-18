@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management</title>
     <link rel="stylesheet" href="styles.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 </head>
 <style>
     .btn.btn-primary {
@@ -22,40 +17,26 @@
 </style>
 <body>
 <header>
-      <nav
-        class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
-      >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body">
         <div class="container-fluid">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-between"
-            id="navbarNavAltMarkup"
-          >
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="#">About us</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">About us</a>
+                </div>
+                <a class="navbar-brand" href="#">iFixIT</a>
+                <div class="navbar-nav">
+                    <a id="logout" class="nav-link" href="#">Logout</a>
+                </div>
             </div>
-            <a class="navbar-brand" href="#">iFixIT</a>
-            <div class="navbar-nav">
-            
-              <a id="logout" class="nav-link" href="#">Logout</a>
-            </div>
-          </div>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    <div class="container-fluid ">
+<div class="container-fluid ">
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3">
@@ -99,8 +80,9 @@
                                 <th>Phone Number</th>
                                 <th>Address</th>
                                 <th>Date of Birth</th>
-                                <th>Position ID</th>
-                                <th>Schedule ID</th>
+                                <th>Schedule Time</th>
+                                <th>Schedule Days</th>
+                        
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -136,19 +118,19 @@
                                     echo "<td>".$row['phone_number']."</td>";
                                     echo "<td>".$row['address']."</td>";
                                     echo "<td>".$row['date_of_birth']."</td>";
-                                    echo "<td>".$row['position_id']."</td>";
-                                    echo "<td>".$row['schedule_id']."</td>";
+                                    echo "<td>".$row['schedule_time']."</td>";
+                                    echo "<td>".$row['schedule_days']."</td>";
+                                    
                                     echo "<td>";
                                     echo "<div class='btn-group' role='group' aria-label='Operations'>";
                                     echo "<a href='emp_edit.php?id=" . $row['employee_id'] . "' class='btn btn-secondary'>Edit</a>";
                                     echo "<a href='delete_employee.php?id=" . $row['employee_id'] . "' class='btn btn-dark'>Delete</a>";
                                     echo "</div>";
                                     echo "</td>";
-                                    
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='10'>No employees found</td></tr>";
+                                echo "<tr><td colspan='11'>No employees found</td></tr>";
                             }
 
                             // Close database connection
@@ -175,10 +157,6 @@
         window.location.href = "main.html";
       });
     </script>
-<script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
